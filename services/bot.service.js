@@ -3,7 +3,7 @@ const client = new Discord.Client()
 const config = require('../utils/config')
 // const commands = require('../utils/commands')
 // const db = require('../services/db.service')
-const UserService = require('../services/user.service')
+// const UserService = require('../services/user.service')
 // const esndb = db.esndb
 
 let DISCORD_BOT_TOKEN = process.env.DISCORD_BOT_TOKEN
