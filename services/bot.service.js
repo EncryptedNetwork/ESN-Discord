@@ -1,7 +1,7 @@
 const Discord = require('discord.js')
 const client = new Discord.Client()
 const config = require('../utils/config')
-// const commands = require('../utils/commands')
+const commands = require('../utils/commands')
 const db = require('../services/db.service')
 
 const esndb = db.esndb
@@ -39,7 +39,7 @@ client.on('message', message => {
   const command = commands[commandKey]
   const params = {author, channel, args, client, member, message}
 
-  require('../utils/music')(esndb, params)
+  // require('../utils/music')(esndb, params)
 
   if(!command) {
     return
