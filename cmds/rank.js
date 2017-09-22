@@ -10,8 +10,9 @@ module.exports = (esndb, params) => {
     message
   } = params
 
-  const users = esndb.child('users')
-  const ranks = esndb.child('ranks')
+  let users = esndb.child('users')
+  let ranks = esndb.child('ranks')
+  
   let commandReq = args[0]
   let userProfile = args[1]
   let desiredRank = args[1]
