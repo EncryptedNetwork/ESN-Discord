@@ -48,7 +48,7 @@ module.exports = (esndb, params) => {
       }})
     } else {
       userProfile = trim(userProfile.toString(), `<!@>abcdefghijklmnop`) // Get true Discord ID
-
+        console.log(userProfile)
       client.fetchUser(userProfile).then(up => {
         let targetUsername = up.username
 
@@ -59,6 +59,8 @@ module.exports = (esndb, params) => {
                 db.newDiscordUser(userProfile, targetUsername)
                 ranks.child(desiredRank).once('value').then((rankSnapshot) => {
                     let rank = rankSnapshot.val()
+
+                    console.log("desired rank: " + desiredRank)
   
                     if (!rank) {
                       author.send({ embed: {
