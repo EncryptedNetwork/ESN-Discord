@@ -85,7 +85,7 @@ client.on('message', message => {
 client.on('guildMemberAdd', (member) => {
   db.getUserByDiscordID(member.id).then((user) => {
     if (!user) {
-      db.newDiscordUser(member.id, member.nickname)
+      db.newDiscordUser(member.id, member.user.username)
       return
     }
 

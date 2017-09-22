@@ -36,6 +36,7 @@ exports.newDiscordUser = function(discordid, username) {
   user.username = username
   user.created = date
   user.discordid = discordid
+  user.esnid = esnid
   user.exp = 0
   user.level = 0
   user.expup = 100

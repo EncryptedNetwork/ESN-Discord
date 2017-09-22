@@ -17,7 +17,7 @@ module.exports = (esndb, params) => {
   let desiredRank = args[2]
 
   if (!desiredRank) {
-    channel.send({ embed: {
+    author.send({ embed: {
       color: config.COLOR_ERROR,
       title: `Error A101`,
       description: `Insufficient arguments. Usage: ` + config.prefix + `rank <set:add> [@user] <rank>`
@@ -29,7 +29,7 @@ module.exports = (esndb, params) => {
   }
 
   if (!commandReq) {
-    channel.send({ embed: {
+    author.send({ embed: {
       color: config.COLOR_ERROR,
       title: `Error A102`,
       description: `Insufficient arguments. Usage: ` + config.prefix + `rank <set:add> [@user] <rank>`
@@ -39,7 +39,7 @@ module.exports = (esndb, params) => {
 // SET CMD
   if (commandReq === 'set') {
     if (!userProfile) {
-      channel.send({ embed: {
+      author.send({ embed: {
         color: config.COLOR_ERROR,
         title: `Error A103`,
         description: `Insufficient arguments. Usage: ` + config.prefix + `rank set <@user> <rank>`
@@ -54,17 +54,22 @@ module.exports = (esndb, params) => {
           db.getUserByDiscordID(userProfile).then((user) => {
 
             if(!user) {
-              channel.send({ embed: {
-                  color: config.COLOR_ERROR,
-                  title: `Error A107`,
-                  description: `That User has yet to link their Discord Account to the NG Network.`
-                }})
+                db.newDiscordUser(userProfile, targetUsername)
+                users.child(user.esnid).update({
+                    rank: desiredRank,
+                    name: targetUsername
+                  })
+
+                  let specrole = rank.display
+                  let role = message.guild.roles.find("name", specrole)
+                  let member = message.mentions.members.first()
+                  member.setRoles([role])
                 return
             }
 
             if (user) {
               if (user.rank === desiredRank) {
-                channel.send({ embed: {
+                author.send({ embed: {
                   color: config.COLOR_ERROR,
                   title: `Error A104`,
                   description: `User is already that rank.`
@@ -75,13 +80,13 @@ module.exports = (esndb, params) => {
                   let rank = rankSnapshot.val()
 
                   if (!rank) {
-                    channel.send({ embed: {
+                    author.send({ embed: {
                       color: config.COLOR_ERROR,
                       title: `Error A105`,
                       description: `That rank does not exist. If you have sufficient permissions, use ` + config.prefix + `rank add <rank name (ONE WORD)> <rank perm level 1-20> <rank display name>`
                     }})
                   } else {
-                    users.child(user.ngid).update({
+                    users.child(user.esnid).update({
                       rank: desiredRank,
                       name: targetUsername
                     })
@@ -91,7 +96,7 @@ module.exports = (esndb, params) => {
                     let member = message.mentions.members.first()
                     member.setRoles([role])
 
-                    channel.send({ embed: {
+                    author.send({ embed: {
                       color: config.COLOR_SUCCESS,
                       title: `Successfully updated rank of user: ` + targetUsername,
                       description: `Rank of ` + targetUsername + ` changed to ` + specrole + `!`
@@ -110,7 +115,7 @@ module.exports = (esndb, params) => {
                     description: `That rank does not exist. If you have sufficient permissions, use ` + config.prefix + `rank add <rank name>`
                   }})
                 } else {
-                  users.child(user.ngid).update({
+                  users.child(user.esnid).update({
                     rank: desiredRank,
                     name: targetUsername
                   })
@@ -150,7 +155,7 @@ module.exports = (esndb, params) => {
 // HAVE TO ADD A CHECK TO SEE IF RANK ALREADY EXISTS
 
       if (isNaN(rankPower)) {
-        channel.send({ embed: {
+        author.send({ embed: {
           color: config.COLOR_ERROR,
           title: `Error B102: rankPower cannot be: ` + rankPower + `. Must be a valid integer.`,
           description: `Insufficient arguments. Usage: \`\`` + config.prefix + `rank add\`\` \`\`<rank name (ONE WORD)>\`\` \`\`<power (highest) 1-20 (lowest)\`\` \`\`<appearance name (what the rank is called in discord)>\`\``
@@ -165,7 +170,7 @@ module.exports = (esndb, params) => {
           display: display,
           power: rankPower
         })
-        channel.send({ embed: {
+        author.send({ embed: {
           color: config.COLOR_SUCCESS,
           title: `Sucess! New rank added to Database.`,
           description: `Your new rank has been added. You can now set users to have your wonderful new rank. Woot woot.`

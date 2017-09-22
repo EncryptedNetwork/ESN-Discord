@@ -1,7 +1,7 @@
 module.exports = {
     
     // BASE
-      version: `0.0.2`, // BOT VERSION
+      version: `0.0.3`, // BOT VERSION
       prefix: `!`, // GLOBAL COMMAND PREFIX
       devPrefix: `$`, // GLOBAL DEV COMMAND PREFIX
     
@@ -22,7 +22,7 @@ module.exports = {
       COLOR_SUCCESS: 3066993, // GLOBAL SUCCESS COLOR
 
     // SETTINGS
-    
+
       // MESSAGE CLEANUP
         MESSAGE_CLEANUP: false,
         MESSAGE_TIMER: 10,
