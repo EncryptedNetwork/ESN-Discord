@@ -12,10 +12,10 @@ module.exports = (esndb, params) => {
 
   let users = esndb.child('users')
   let ranks = esndb.child('ranks')
-  
+
   let commandReq = args[0]
   let userProfile = args[1]
-  let desiredRank = args[1]
+  let desiredRank = args[2]
 
   if (!desiredRank) {
     author.send({ embed: {
