@@ -19,8 +19,8 @@ client.on('ready', () => {
 })
 
 // FIREBASE THINGS
-let users = esndb.child('users')
-let ranks = esndb.child('ranks')
+// let users = esndb.child('users')
+// let ranks = esndb.child('ranks')
 
 // COMMAND MANAGER (TO BE ADDED)
 // client.on('message', message => {
