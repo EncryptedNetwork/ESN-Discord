@@ -8,6 +8,9 @@
       "build-apply": "browserify public/js/pages/Uapply.js -o public/js/pages/apply.js"
     },
     "author": "Null Reality",
+    "dependencies": {
+      "discord.js": "latest"
+    },
     "repository": {
       "type": "git",
       "url": "https://github.com/heroku/esn-db.git"
