@@ -49,8 +49,10 @@ module.exports = (esndb, params) => {
     } else {
       userProfile = trim(userProfile.toString(), `<!@>abcdefghijklmnop`) // Get true Discord ID
         console.log(userProfile)
+        console.log("desired rank: " + desiredRank)
       client.fetchUser(userProfile).then(up => {
         let targetUsername = up.username
+        console.log("desired rank: " + desiredRank)
 
         message.guild.fetchMember(userProfile).then(fetchedMember => {
           db.getUserByDiscordID(userProfile).then((user) => {
