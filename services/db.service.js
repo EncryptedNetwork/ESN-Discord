@@ -30,7 +30,8 @@ exports.newDiscordUser = function(discordid, username) {
   let date = new Date()
   let esnid = uid.generateUID()
   console.log('creating new user with esnid: ' + esnid)
-
+  
+  let user = {}
   user.credits = 0
   user.username = username
   user.created = date
