@@ -1,4 +1,5 @@
 require('./services/bot.service')
+require('./services/db.service')
 
 // Required requires
 const express = require('express')
@@ -16,5 +17,5 @@ app.get('/wakemydyno.txt', function (req, res) {
 })
 
 app.listen(app.get('port'), function () {
-    console.log('Website Service Online (' + app.get('port') + ").")
+    console.log('App Service Online (' + app.get('port') + ").")
 })

@@ -2,9 +2,9 @@ const Discord = require('discord.js')
 const client = new Discord.Client()
 const config = require('../utils/config')
 // const commands = require('../utils/commands')
-// const db = require('../services/db.service')
-// const UserService = require('../services/user.service')
-// const esndb = db.esndb
+const db = require('../services/db.service')
+
+const esndb = db.esndb
 
 let DISCORD_BOT_TOKEN = process.env.DISCORD_BOT_TOKEN
 
@@ -23,80 +23,84 @@ client.on('ready', () => {
 // let ranks = esndb.child('ranks')
 
 // COMMAND MANAGER (TO BE ADDED)
-// client.on('message', message => {
-//   const {author, content, channel, member} = message
-//   const args = content.split(' ')
-//   let commandKey = args.shift()
-//   commandKey = commandKey.toLowerCase()
+client.on('message', message => {
+  const {author, content, channel, member} = message
+  const args = content.split(' ')
+  let commandKey = args.shift()
+  commandKey = commandKey.toLowerCase()
 
-//   // CHAT FILTER PARAMS + REQUIRE
-//   const cparams = {author, message, channel}
-//   require('../utils/chatfilter')(ngdb, cparams)
+  // CHAT FILTER PARAMS + REQUIRE
+  const cparams = {author, message, channel}
+  require('../utils/chatfilter')(esndb, cparams)
 
-//   // DOES THE MESSAGE INCLUDE THE PREFIX?
-//   if (!commandKey.includes(config.prefix)) return
-//   commandKey = trim(commandKey, config.prefix)
-//   const command = commands[commandKey]
-//   const params = {author, channel, args, client, member, message}
+  // DOES THE MESSAGE INCLUDE THE PREFIX?
+  if (!commandKey.includes(config.prefix)) return
+  commandKey = trim(commandKey, config.prefix)
+  const command = commands[commandKey]
+  const params = {author, channel, args, client, member, message}
 
-//   require('../utils/music')(ngdb, params)
+  require('../utils/music')(esndb, params)
 
-//   if(!command) {
-//     return
-//   }
+  if(!command) {
+    return
+  }
 
-//   UserService.getUserByDiscordID(author.id).then((user) => {
-//     if (!user) {
-//       if (command.permLevel <= 20) {
-//         command.handler(ngdb, params)
-//         return
-//       } else {
-//         channel.sendEmbed({
-//           color: config.COLOR_ERROR,
-//           title: `Permission Error`,
-//           description: `You do not have permission to issue this command.`
-//         })
-//         return
-//       }
-//     }
+  if(config.COMMAND_CLEANUP) message.delete()
 
-//     let rank = user.rank
+  db.getUserByDiscordID(author.id).then((user) => {
+    if (!user) {
+      if (command.permLevel <= 20) {
+        command.handler(esndb, params)
+        return
+      } else {
+        channel.sendEmbed({
+          color: config.COLOR_ERROR,
+          title: `Permission Error`,
+          description: `You do not have permission to issue this command.`
+        })
+        return
+      }
+    }
 
-//     ranks.child(rank).once('value').then((rankSnapshot) => {
-//       let rank = rankSnapshot.val()
+    let rank = user.rank
 
-//       if (command.permLevel >= rank.power) {
-//         command.handler(ngdb, params)
-//         return
-//       } else {
-//         channel.send({ embed: {
-//           color: config.COLOR_ERROR,
-//           title: `Permission Error`,
-//           description: `You do not have permission to issue this command.`
-//         }})
-//         return
-//       }
-//     })
-//   })
-// })
+    ranks.child(rank).once('value').then((rankSnapshot) => {
+      let rank = rankSnapshot.val()
 
-// client.on('guildMemberAdd', (member) => {
-//   UserService.getUserByDiscordID(member.id).then((user) => {
-//     if (!user) {
-//       return
-//     }
+      if (command.permLevel >= rank.power) {
+        command.handler(esndb, params)
+        return
+      } else {
+        channel.send({ embed: {
+          color: config.COLOR_ERROR,
+          title: `Permission Error`,
+          description: `You do not have permission to issue this command.`
+        }})
+        return
+      }
+    })
+  })
+})
 
-//     let rank = user.rank
+// DB User Manager
+client.on('guildMemberAdd', (member) => {
+  db.getUserByDiscordID(member.id).then((user) => {
+    if (!user) {
+      db.newDiscordUser(member.id, member.nickname)
+      return
+    }
 
-//     ranks.child(rank).once('value').then((rankSnapshot) => {
-//       let userRank = rankSnapshot.val()
+    let rank = user.rank
 
-//       let specrole = userRank.display
-//       let role = member.guild.roles.find("name", specrole)
-//       member.setRoles([role])
-//     })
-//   })
-// })
+    ranks.child(rank).once('value').then((rankSnapshot) => {
+      let userRank = rankSnapshot.val()
+
+      let specrole = userRank.display
+      let role = member.guild.roles.find("name", specrole)
+      member.setRoles([role])
+    })
+  })
+})
 
 // client.on('message', message => {
 //   if (!message.author.bot) return
@@ -113,6 +117,16 @@ client.on('ready', () => {
 //       return
 //     }
 // })
+
+// (U-OP)
+client.on('message', message => {
+  if(!config.MESSAGE_CLEANUP) return
+  if(message.author.bot) {
+    setTimeout(
+      message.delete()
+    ), 1000 * config.MESSAGE_TIMER
+  } else return
+})
 
 module.exports = client
 

@@ -1,4 +1,5 @@
 const config = require('../utils/config')
+const uid = require('../utils/uid')
 
 let firebase = require('firebase')
 
@@ -18,16 +19,28 @@ if(firebase.apps.length) {
 }
 
 // FIREBASE DIRECTORY INITIALIZER
-let esndb = firebase.database().ref('esndb')
+let esndb = firebase.database().ref('esn')
 let users = esndb.child('users')
 
 // let ranks = esndb.child('ranks')
 
 exports.esndb = esndb
 
-exports.newUser = function(userid, user) {
-  user.esnid = userid
-  users.child(userid).update(user)
+exports.newDiscordUser = function(discordid, username) {
+  let date = new Date()
+  let esnid = uid.generateUID
+
+  user.credits = 0
+  user.username = username
+  user.created = date
+  user.discordid = discordid
+  user.exp = 0
+  user.level = 0
+  user.expup = 100
+  user.totalexp = 0
+  user.rank = "user"
+
+  users.child(esnid).update(user)
 }
 
 exports.userExists = function(userid) {
@@ -49,15 +62,6 @@ exports.getUser = function(userid) {
   })
 }
 
-exports.getApplication = function(appid) {
-  return new Promise((resolve, reject) => {
-    return applications.child(appid).once('value').then(appSnapshot => {
-      let appbody = appSnapshot.val()
-      resolve (appbody)
-    })
-  })
-}
-
 exports.getUserRank = function(ngid) {
   return users.child(ngid).once('value').then(function(userSnapshot) {
     let user = userSnapshot.val()
@@ -67,5 +71,25 @@ exports.getUserRank = function(ngid) {
 
       return rank
     })
+  })
+}
+
+exports.getUserByDiscordID = function(discordid) {
+  return new Promise((resolve, reject) => {
+      var max = 0
+      return users.orderByChild('discordid').equalTo(discordid).once('value', function(snapshot) {
+          snapshot.forEach(function(childAppSnapshot) {
+              max++
+          })
+
+          if(max === 0) {
+              resolve(null)
+          }
+          
+          return snapshot.forEach(function(childAppSnapshot) {
+              let user = childAppSnapshot.val()
+              resolve(user)
+          })
+      })
   })
 }
