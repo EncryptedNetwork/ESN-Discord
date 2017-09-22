@@ -65,8 +65,8 @@ exports.getUser = function(userid) {
   })
 }
 
-exports.getUserRank = function(ngid) {
-  return users.child(ngid).once('value').then(function(userSnapshot) {
+exports.getUserRank = function(userid) {
+  return users.child(userid).once('value').then(function(userSnapshot) {
     let user = userSnapshot.val()
 
     return ranks.child(user.rank).once('value').then(function(rankSnapshot) {
