@@ -29,9 +29,9 @@ client.on('message', message => {
   let commandKey = args.shift()
   commandKey = commandKey.toLowerCase()
 
-  // CHAT FILTER PARAMS + REQUIRE
-  const cparams = {author, message, channel}
-  require('../utils/chatfilter')(esndb, cparams)
+  // // CHAT FILTER PARAMS + REQUIRE
+  // const cparams = {author, message, channel}
+  // require('../utils/chatfilter')(esndb, cparams)
 
   // DOES THE MESSAGE INCLUDE THE PREFIX?
   if (!commandKey.includes(config.prefix)) return
