@@ -9,7 +9,8 @@
     },
     "author": "Null Reality",
     "dependencies": {
-      "discord.js": "latest"
+      "discord.js": "latest",
+      "express": "latest"
     },
     "repository": {
       "type": "git",

@@ -1,5 +1,9 @@
 require('./services/bot.service')
 
+// Required requires
+const express = require('express')
+const app = express()
+
 require('events').EventEmitter.defaultMaxListeners = Infinity
 
 app.set('port', (process.env.PORT || 5000))
