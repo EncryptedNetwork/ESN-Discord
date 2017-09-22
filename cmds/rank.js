@@ -14,7 +14,7 @@ module.exports = (esndb, params) => {
   const ranks = esndb.child('ranks')
   let commandReq = args[0]
   let userProfile = args[1]
-  let desiredRank = args[2]
+  let desiredRank = args[1]
 
   if (!desiredRank) {
     author.send({ embed: {
@@ -34,6 +34,7 @@ module.exports = (esndb, params) => {
       title: `Error A102`,
       description: `Insufficient arguments. Usage: ` + config.prefix + `rank <set:add> [@user] <rank>`
     }})
+    return
   }
 
 // SET CMD
