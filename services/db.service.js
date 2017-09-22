@@ -28,7 +28,8 @@ exports.esndb = esndb
 
 exports.newDiscordUser = function(discordid, username) {
   let date = new Date()
-  let esnid = uid.generateUID
+  let esnid = uid.generateUID()
+  console.log('creating new user with esnid: ' + esnid)
 
   user.credits = 0
   user.username = username
@@ -43,6 +44,7 @@ exports.newDiscordUser = function(discordid, username) {
   users.child(esnid).update(user)
 }
 
+// **DEPRECATED**
 exports.userExists = function(userid) {
   return users.child(userid).once('value').then(userSnapshot => {
     let user = userSnapshot.val()

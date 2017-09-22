@@ -45,8 +45,6 @@ client.on('message', message => {
     return
   }
 
-  if(config.COMMAND_CLEANUP) message.delete()
-
   db.getUserByDiscordID(author.id).then((user) => {
     if (!user) {
       if (command.permLevel <= 20) {
@@ -80,6 +78,7 @@ client.on('message', message => {
       }
     })
   })
+  if(config.COMMAND_CLEANUP) message.delete()
 })
 
 // DB User Manager
