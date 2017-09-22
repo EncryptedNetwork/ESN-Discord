@@ -56,15 +56,33 @@ module.exports = (esndb, params) => {
 
             if(!user) {
                 db.newDiscordUser(userProfile, targetUsername)
-                users.child(user.esnid).update({
-                    rank: desiredRank,
-                    name: targetUsername
+                ranks.child(desiredRank).once('value').then((rankSnapshot) => {
+                    let rank = rankSnapshot.val()
+  
+                    if (!rank) {
+                      author.send({ embed: {
+                        color: config.COLOR_ERROR,
+                        title: `Error A1051`,
+                        description: `That rank does not exist. If you have sufficient permissions, use ` + config.prefix + `rank add <rank name (ONE WORD)> <rank perm level 1-20> <rank display name>`
+                      }})
+                    } else {
+                      users.child(user.esnid).update({
+                        rank: desiredRank,
+                        name: targetUsername
+                      })
+  
+                      let specrole = rank.display
+                      let role = message.guild.roles.find("name", specrole)
+                      let member = message.mentions.members.first()
+                      member.setRoles([role])
+  
+                      author.send({ embed: {
+                        color: config.COLOR_SUCCESS,
+                        title: `Successfully updated rank of user: ` + targetUsername,
+                        description: `Rank of ` + targetUsername + ` changed to ` + specrole + `!`
+                      }})
+                    }
                   })
-
-                  let specrole = rank.display
-                  let role = message.guild.roles.find("name", specrole)
-                  let member = message.mentions.members.first()
-                  member.setRoles([role])
                 return
             }
 
