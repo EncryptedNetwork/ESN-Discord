@@ -3,7 +3,7 @@ const client = new Discord.Client()
 const config = require('../utils/config')
 const commands = require('../utils/commands')
 const db = require('../services/db.service')
-
+const UserService = require('../services/user.service')
 const esndb = db.esndb
 
 let DISCORD_BOT_TOKEN = process.env.DISCORD_BOT_TOKEN
@@ -13,7 +13,7 @@ if(config.CON_DISCORD) {
 }
 
 client.on('ready', () => {
-  config.STATUS_DISCORD = "online"
+  config.STATUS_esndb = "online"
   console.log('Discord Service Online.')
   client.user.setGame(`Dev Build v` + config.version)
 })
@@ -22,16 +22,12 @@ client.on('ready', () => {
 let users = esndb.child('users')
 let ranks = esndb.child('ranks')
 
-// COMMAND MANAGER (TO BE ADDED)
+// COMMAND MANAGER
 client.on('message', message => {
   const {author, content, channel, member} = message
   const args = content.split(' ')
   let commandKey = args.shift()
   commandKey = commandKey.toLowerCase()
-
-  // // CHAT FILTER PARAMS + REQUIRE
-  // const cparams = {author, message, channel}
-  // require('../utils/chatfilter')(esndb, cparams)
 
   // DOES THE MESSAGE INCLUDE THE PREFIX?
   if (!commandKey.includes(config.prefix)) return
@@ -39,13 +35,15 @@ client.on('message', message => {
   const command = commands[commandKey]
   const params = {author, channel, args, client, member, message}
 
-  // require('../utils/music')(esndb, params)
+  require('../utils/music')(esndb, params)
 
   if(!command) {
     return
   }
 
-  db.getUserByDiscordID(author.id).then((user) => {
+  if(config.COMMAND_CLEANUP) message.delete()
+
+  UserService.getUserByDiscordID(author.id).then((user) => {
     if (!user) {
       if (command.permLevel <= 20) {
         command.handler(esndb, params)
@@ -78,10 +76,9 @@ client.on('message', message => {
       }
     })
   })
-  if(config.COMMAND_CLEANUP) message.delete()
 })
 
-// DB User Manager
+// DB User Management
 client.on('guildMemberAdd', (member) => {
   db.getUserByDiscordID(member.id).then((user) => {
     if (!user) {
@@ -99,32 +96,6 @@ client.on('guildMemberAdd', (member) => {
       member.setRoles([role])
     })
   })
-})
-
-// client.on('message', message => {
-//   if (!message.author.bot) return
-//     let filteredWords = ['help on the way']
-//     let content = message.content.toLowerCase()
-//     console.log(message.content)
-//     if(message.embeds[0].title.includes(filteredWords)) {
-//       console.log(message.embeds[0])
-//       message.delete(1000)
-//     }
-//     if(content.includes(filteredWords)) {
-//       message.delete(1000)
-//     } else {
-//       return
-//     }
-// })
-
-// (U-OP)
-client.on('message', message => {
-  if(!config.MESSAGE_CLEANUP) return
-  if(message.author.bot) {
-    setTimeout(
-      message.delete()
-    ), 1000 * config.MESSAGE_TIMER
-  } else return
 })
 
 module.exports = client

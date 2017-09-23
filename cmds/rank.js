@@ -1,5 +1,6 @@
 const config = require(`../utils/config`)
 const db = require('../services/db.service')
+const UserService = require('../services/user.service')
 
 module.exports = (esndb, params) => {
   const {
@@ -10,9 +11,8 @@ module.exports = (esndb, params) => {
     message
   } = params
 
-  let users = esndb.child('users')
-  let ranks = esndb.child('ranks')
-
+  const users = esndb.child('users')
+  const ranks = esndb.child('ranks')
   let commandReq = args[0]
   let userProfile = args[1]
   let desiredRank = args[2]
@@ -35,7 +35,6 @@ module.exports = (esndb, params) => {
       title: `Error A102`,
       description: `Insufficient arguments. Usage: ` + config.prefix + `rank <set:add> [@user] <rank>`
     }})
-    return
   }
 
 // SET CMD
@@ -48,47 +47,43 @@ module.exports = (esndb, params) => {
       }})
     } else {
       userProfile = trim(userProfile.toString(), `<!@>abcdefghijklmnop`) // Get true Discord ID
-        console.log(userProfile)
-        console.log("desired rank: " + desiredRank)
+
       client.fetchUser(userProfile).then(up => {
         let targetUsername = up.username
-        console.log("desired rank: " + desiredRank)
 
         message.guild.fetchMember(userProfile).then(fetchedMember => {
-          db.getUserByDiscordID(userProfile).then((user) => {
+          UserService.getUserByDiscordID(userProfile).then((user) => {
 
             if(!user) {
-                db.newDiscordUser(userProfile, targetUsername)
-                ranks.child(desiredRank).once('value').then((rankSnapshot) => {
-                    let rank = rankSnapshot.val()
+              db.newDiscordUser(userProfile, targetUsername)
+              ranks.child(desiredRank).once('value').then((rankSnapshot) => {
+                let rank = rankSnapshot.val()
 
-                    console.log("desired rank: " + desiredRank)
-  
-                    if (!rank) {
-                      author.send({ embed: {
-                        color: config.COLOR_ERROR,
-                        title: `Error A1051`,
-                        description: `That rank does not exist. If you have sufficient permissions, use ` + config.prefix + `rank add <rank name (ONE WORD)> <rank perm level 1-20> <rank display name>`
-                      }})
-                    } else {
-                      users.child(user.esnid).update({
-                        rank: desiredRank,
-                        name: targetUsername
-                      })
-  
-                      let specrole = rank.display
-                      let role = message.guild.roles.find("name", specrole)
-                      let member = message.mentions.members.first()
-                      member.setRoles([role])
-  
-                      author.send({ embed: {
-                        color: config.COLOR_SUCCESS,
-                        title: `Successfully updated rank of user: ` + targetUsername,
-                        description: `Rank of ` + targetUsername + ` changed to ` + specrole + `!`
-                      }})
-                    }
+                if (!rank) {
+                  author.send({ embed: {
+                    color: config.COLOR_ERROR,
+                    title: `Error A105`,
+                    description: `That rank does not exist. If you have sufficient permissions, use ` + config.prefix + `rank add <rank name (ONE WORD)> <rank perm level 1-20> <rank display name>`
+                  }})
+                } else {
+                  users.child(user.esni).update({
+                    rank: desiredRank,
+                    name: targetUsername
                   })
-                return
+
+                  let specrole = rank.display
+                  let role = message.guild.roles.find("name", specrole)
+                  let member = message.mentions.members.first()
+                  member.setRoles([role])
+
+                  author.send({ embed: {
+                    color: config.COLOR_SUCCESS,
+                    title: `Successfully updated rank of user: ` + targetUsername,
+                    description: `Rank of ` + targetUsername + ` changed to ` + specrole + `!`
+                  }})
+                }
+              })
+              return
             }
 
             if (user) {
@@ -133,13 +128,13 @@ module.exports = (esndb, params) => {
                 let rank = rankSnapshot.val()
 
                 if (!rank) {
-                  channel.send({ embed: {
+                  author.send({ embed: {
                     color: config.COLOR_ERROR,
                     title: `Error A106`,
                     description: `That rank does not exist. If you have sufficient permissions, use ` + config.prefix + `rank add <rank name>`
                   }})
                 } else {
-                  users.child(user.esnid).update({
+                  users.child(user.esni).update({
                     rank: desiredRank,
                     name: targetUsername
                   })
@@ -149,7 +144,7 @@ module.exports = (esndb, params) => {
                     let member = message.mentions.members.first()
                     member.setRoles([role])
 
-                  channel.send({ embed: {
+                  author.send({ embed: {
                     color: config.COLOR_SUCCESS,
                     title: `Successfully updated rank of user: ` + targetUsername,
                     description: `Rank of ` + targetUsername + ` changed to ` + specrole + `!`
@@ -166,7 +161,7 @@ module.exports = (esndb, params) => {
 // ADD CMD
   if (commandReq === 'add') {
     if (!args[1]) {
-      channel.send({ embed: {
+      author.send({ embed: {
         color: config.COLOR_ERROR,
         title: `Error B101`,
         description: `Insufficient arguments. Usage: \`\`` + config.prefix + `rank add\`\` \`\`<rank name (ONE WORD)>\`\` \`\`<power (highest) 1-20 (lowest)\`\` \`\`<appearance name (what the rank is called in discord)>\`\``

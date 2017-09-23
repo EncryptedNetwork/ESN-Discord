@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+
+		<% include ../partials/header.ejs %>
+		<title>Native Gaming - About</title>
+
+	</head>
+
+	<body>
+		
+		<div id="site-content">
+			<header class="site-header">
+				<div class="container">
+					<% include ../partials/logo.ejs %>
+					
+					<nav class="main-navigation">
+						<button type="button" class="toggle-menu"><i class="fa fa-bars"></i></button>
+						<ul class="menu">
+							<li class="menu-item"><a href="/">Home</a></li>
+							<li class="menu-item current-menu-item"><a href="/about">About</a></li>
+							<li class="menu-item"><a href="/media">Media</a></li>
+							<li class="menu-item"><a href="/shop">Shop</a></li>
+							<li class="menu-item"><a href="/news">News</a></li>
+							<li class="menu-item"><a href="/apply">Application</a></li>
+							<li class="menu-item"><a href="/support">Support</a></li>
+							<% if(user.ngid) { %><li class="menu-item"><a href="<%= user.profile %>" >Profile</a></li><% } else { %><li class="menu-item"><a href="/login" >Login/Signup</a></li><% } %>
+						</ul> <!-- .menu -->
+					</nav> <!-- .main-navigation -->
+					<div class="mobile-menu"></div>
+				</div>
+			</header> <!-- .site-header -->
+			
+			<main class="main-content">
+				<div class="fullwidth-block inner-content">
+					<div class="container">
+						<div class="row">
+							<div class="col-md-7">
+								<div class="content">
+									<h2 class="entry-title">Our History</h2>
+									<figure class="featured-image">
+										<img src="/images/slide-2.jpg" alt="post image">
+									</figure>
+									<p class="leading">Thanks to the wonderful person named "Marijuana"</p>
+
+									<p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.</p>
+								</div>
+							</div>
+							<div class="col-md-4 col-md-push-1">
+								<aside class="sidebar">
+									<div class="widget">
+										<h3 class="widget-title">Recent Posts</h3>
+										<ul class="discography-list">
+											<li>
+												<figure class="cover"><img src="/images/thumbnail-1.png" alt="thumbnail 1"></figure>
+												<div class="detail">
+													<h3><a href="#">Post Title</a></h3>
+													<span class="year">2001</span>
+													<span class="track">Short Description</span>
+												</div>
+											</li>
+											<li>
+												<figure class="cover"><img src="/images/thumbnail-2.png" alt="thumbnail 2"></figure>
+												<div class="detail">
+													<h3><a href="#">Post Title</a></h3>
+													<span class="year">2001</span>
+													<span class="track">Short Description</span>
+												</div>
+											</li>
+											<li>
+												<figure class="cover"><img src="/images/thumbnail-3.png" alt="thumbnail 3"></figure>
+												<div class="detail">
+													<h3><a href="#">Post Title</a></h3>
+													<span class="year">2001</span>
+													<span class="track">Short Description</span>
+												</div>
+											</li>
+											<li>
+												<figure class="cover"><img src="/images/thumbnail-4.png" alt="thumbnail 4"></figure>
+												<div class="detail">
+													<h3><a href="#">Post Title</a></h3>
+													<span class="year">2001</span>
+													<span class="track">Short Description</span>
+												</div>
+											</li>
+											<li>
+												<figure class="cover"><img src="/images/thumbnail-5.png" alt="thumbnail 5"></figure>
+												<div class="detail">
+													<h3><a href="#">Post Title</a></h3>
+													<span class="year">2001</span>
+													<span class="track">Short Description</span>
+												</div>
+											</li>
+										</ul>
+									</div>
+								</aside>
+							</div>
+						</div>
+					</div>
+				</div> <!-- .testimonial-section -->
+
+				
+			</main> <!-- .main-content -->
+
+			<% if(!user.ngid) { %>
+				<% include ../partials/footer.ejs %>
+			<% } else { %>
+				<% include ../partials/lfooter.ejs %>
+			<% } %>
+
+		</div> <!-- #site-content -->
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>		
+		<script src="/js/plugins.js"></script>
+		<script src="/js/app.js"></script>
+		
+	</body>
+
+</html>

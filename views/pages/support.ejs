@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+
+		<% include ../partials/header.ejs %>
+		<title>Native Gaming - Submit a Support Ticket</title>
+
+	</head>
+
+	<body>
+		
+		<div id="site-content">
+			<header class="site-header">
+				<div class="container">
+					<% include ../partials/logo.ejs %>
+					
+					<nav class="main-navigation">
+						<button type="button" class="toggle-menu"><i class="fa fa-bars"></i></button>
+						<ul class="menu">
+							<li class="menu-item"><a href="/">Home</a></li>
+							<li class="menu-item"><a href="/about">About</a></li>
+							<li class="menu-item"><a href="/media">Media</a></li>
+							<li class="menu-item"><a href="/shop">Shop</a></li>
+							<li class="menu-item"><a href="/news">News</a></li>
+							<li class="menu-item"><a href="/apply">Application</a></li>
+							<li class="menu-item current-menu-item"><a href="/support">Support</a></li>
+							<% if(user.ngid) { %><li class="menu-item"><a href="<%= user.profile %>" >Profile</a></li><% } else { %><li class="menu-item"><a href="/login" >Login/Signup</a></li><% } %>
+						</ul> <!-- .menu -->
+					</nav> <!-- .main-navigation -->
+					<div class="mobile-menu"></div>
+				</div>
+			</header> <!-- .site-header -->
+			
+			<main class="main-content">
+				<div class="fullwidth-block inner-content">
+					<div class="container">
+						<h2 class="page-title">Support Ticket</h2>
+						<p id="sup-info">Support Tickets may take up to 3 days for a reply. If you need an answer urgently, contact one of the Support Agents on Discord to view your ticket directly. Troll/Fake Tickets will result in a suspension of ticket submission for one month.</p>
+						<div class="row">
+							<div class="supportarea">
+								<form id="native-ticket" action="#" class="contact-form">
+									<p>Your name:</p>
+									<input id="sup-name" type="text" placeholder="Your name.">
+
+									<p>Your Steam profile link:</p>
+									<input id="sup-sprofile" type="text" placeholder="Steam profile link.">
+
+									<p>The type of issue:</p>
+									<!--<input type="text" placeholder="Position you are applying for? (Options: T. Moderator, Jr. Developer, Support Representative)">-->
+									<input id="sup-type" list="positions" name="position" /></label>
+									<datalist id="positions">
+										<option value="Billing">
+										<option value="Shop Items">
+										<option value="Staff Abuse">
+										<option value="Other">	
+									</datalist>
+
+									<p>The issue:</p>
+									<input id="sup-issue" type="text" placeholder="A detailed explanation as to what the issue is.">
+
+									<p>Other notes: <small>(This could include links to proof or a variety of different documents/links to help support your case)</small></p>
+									<textarea id="sup-other" name="#" placeholder="Other notes that could help solve the issue."></textarea>
+
+									<input id="sup-submit" type="submit" value="Submit Ticket">
+								</form>
+							</div>
+						</div>
+					</div>
+				</div> <!-- .testimonial-section -->
+
+				
+			</main> <!-- .main-content -->
+
+			<% if(!user.ngid) { %>
+				<% include ../partials/footer.ejs %>
+			<% } else { %>
+				<% include ../partials/lfooter.ejs %>
+			<% } %>
+
+		</div> <!-- #site-content -->
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>		
+		<!--<script src="/js/plugins.js"></script>-->
+		<!--<script src="/js/app.js"></script>-->
+		<script src="/js/pages/support.js"></script>
+		
+	</body>
+
+</html>

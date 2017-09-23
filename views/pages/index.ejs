@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		
+		<% include ../partials/header.ejs %>
+		<title>Native Gaming - Home</title>
+
+	</head>
+
+	<body class="header-collapse">
+		
+		<div id="site-content">
+			<header class="site-header">
+				<div class="container">
+					<% include ../partials/logo.ejs %>
+					
+					<nav class="main-navigation">
+						<button type="button" class="toggle-menu"><i class="fa fa-bars"></i></button>
+						<ul class="menu">
+							<li class="menu-item current-menu-item"><a href="/">Home</a></li>
+							<li class="menu-item"><a href="/about">About</a></li>
+							<li class="menu-item"><a href="/media">Media</a></li>
+							<li class="menu-item"><a href="/shop">Shop</a></li>
+							<li class="menu-item"><a href="/news">News</a></li>
+							<li class="menu-item"><a href="/apply">Application</a></li>
+							<li class="menu-item"><a href="/support">Support</a></li>
+							<% if(user.ngid) { %><li class="menu-item"><a href="<%= user.profile %>" >Profile</a></li><% } else { %><li class="menu-item"><a href="/login" >Login/Signup</a></li><% } %>
+						</ul> <!-- .menu -->
+					</nav> <!-- .main-navigation -->
+					<div class="mobile-menu"></div>
+				</div>
+			</header> <!-- .site-header -->
+			
+			<div class="hero">
+				<div class="slider">
+					<ul class="slides">
+						<li class="lazy-bg" data-background="/images/slide-1.jpg">
+							<div class="container">
+								<h2 class="slide-title">Gaming doesn't stop</h2>
+								<h3 class="slide-subtitle">Gaming is your new reality</h3>
+								<p class="slide-desc">The Native Gaming Network is designed to be played throughout your daily life whenever you feel like it.</p>
+
+								<a href="#" class="button cut-corner">Read More</a>
+							</div>
+						</li>
+						<li class="lazy-bg" data-background="/images/slide-2.jpg">
+							<div class="container">
+									<h2 class="slide-title">Adult Content</h2>
+									<h3 class="slide-subtitle">Our servers are open to everyone of all ages and mindsets</h3>
+									<p class="slide-desc">That includes racism, adultism, various kinks, and a variety of fucked up things! You want to have fun, we're here to make sure that happens.</p>
+
+									<a href="#" class="button cut-corner">Read More</a>
+							</div>
+						</li>
+						<li class="lazy-bg" data-background="/images/slide-3.jpg">
+							<div class="container">
+									<h2 class="slide-title">Game Server Galore</h2>
+									<h3 class="slide-subtitle">Garry's Mod TTT, DarkRP, CS:GO, and more..!</h3>
+									<p class="slide-desc">Gaming comes in many forms. That includes text-based RPG's to the most intense competitive game-mode out there. We promote them all.</p>
+
+									<a href="#" class="button cut-corner">Read More</a>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+			
+			<main class="main-content">
+				<div class="fullwidth-block testimonial-section">
+					<div class="container">
+						<div class="quote-slider">
+							<ul class="slides" id="testimonials">
+								<li>
+									<blockquote>
+										<p>"Native Gaming proves to be one of the most entertaining and easy-going communities out there. I especially enjoy the interaction between the players and staff. They're truly all in it for a good time."</p>
+										<cite id="hp1" user-id="184873285304057856">Reality</cite>
+										<span>Lead Developer</span>
+									</blockquote>
+								</li>
+								<li>
+									<blockquote>
+										<p>"As one of the co-owners of the server, I aim for this community to be a comfortable place for people to be themselves and enjoy the company of games whilst amongst our friends and family here in the Native Gaming Community."</p>
+										<cite id="hp2" user-id"246095189582544896">ApolloRXCD</cite>
+										<span>Co-Owner</span>
+									</blockquote>
+								</li>
+								<li>
+									<blockquote>
+										<p>"It is a true pleasure to be a part of the Native Gaming community. Gameplay is like no other along with the most friendly people you would ever meet. One of most the popular game modes TTT (Trouble in Terrorist Town), hosted by Native Gaming, gave me the true experience I have never attained in other servers. I look forward to the future developments of Native Gaming so that gameplay can be better than ever! 10/10"</p>
+										<cite id="hp3" user-id"188783237152112640">Raccoon</cite>
+										<span>NG Member</span>
+									</blockquote>
+								</li>
+								<li>
+									<blockquote>
+										<p>"The Native Gaming community is like a family to me. They're always there to support me, that's what drives me to work so hard to keep the server in (somewhat) good shape. :)"</p>
+										<cite id="hp4" user-id"300218287852224522">Genesis</cite>
+										<span>Administrator</span>
+									</blockquote>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div> <!-- .testimonial-section -->
+
+				<div class="fullwidth-block upcoming-event-section" data-bg-color="#191919">
+					<div class="container">
+						<header class="section-header">
+							<h2 class="section-title">Upcoming Events</h2>
+
+							<div class="event-nav">
+								<a class="prev" id="event-prev" href="#"><i class="fa fa-caret-left"></i></a>
+	    						<a class="next" id="event-next" href="#"><i class="fa fa-caret-right"></i></a>
+							</div> <!-- .event-nav -->
+
+						</header> <!-- .section-header -->
+						<div class="event-carousel">
+
+							<div class="event">
+								<div class="entry-date">
+									<div class="date">10</div>
+									<span class="month">Jun</span>
+								</div>
+								<h2 class="entry-title"><a href="#">Network Overhaul 2.0</a></h2>
+								<p>Since the network that has been in place was only the first phase of teaching GLaDOS- I mean -. There will be further updates on it throughout the week.</p>
+							</div> <!-- .event -->
+
+							<div class="event">
+								<div class="entry-date">
+									<div class="date">25</div>
+									<span class="month">Jun</span>
+								</div>
+								<h2 class="entry-title"><a href="#">Staff Positions Opening Up</a></h2>
+								<p>At this time, those positions are kept quiet, but there will be a handful of positions needing the filling.</p>
+							</div> <!-- .event -->
+							
+							<div class="event">
+								<div class="entry-date">
+									<div class="date">15</div>
+									<span class="month">Aug</span>
+								</div>
+								<h2 class="entry-title"><a href="#">Native Gaming Network Overhaul</a></h2>
+								<p>Thanks to our new wonderful developer <cite>Reality</cite>, a whole new network will be in place as of the 15th of August.</p>
+							</div> <!-- .event -->
+							
+							<div class="event">
+								<div class="entry-date">
+									<div class="date">20</div>
+									<span class="month">Aug</span>
+								</div>
+								<h2 class="entry-title"><a href="#">Discord Bot Games</a></h2>
+								<p>The Native Gaming Community Discord Bot will be updated with the sole purpose to never stop playing games. RPG's in-bound!</p>
+							</div> <!-- .event -->
+							
+							<div class="event">
+								<div class="entry-date">
+									<div class="date">1</div>
+									<span class="month">Sep</span>
+								</div>
+								<h2 class="entry-title"><a href="#">Counter-Strike: Global Offensive Server Online</a></h2>
+								<p>The long awaited CS:GO Server will be online as of the first of September. Bring your friends! Bring your mom! Bring your dead grand-father!</p>
+							</div> <!-- .event -->
+							
+						</div> <!-- .event-carousel -->
+					</div> <!-- .container -->
+				</div> <!-- .upcoming-event-section -->
+
+				<div class="fullwidth-block why-chooseus-section">
+					<div class="container">
+						<h2 class="section-title">What's different about us?</h2>
+
+						<div class="row">
+							<div class="col-md-4">
+								<div class="feature">
+									<figure class="cut-corner">
+										<img src="/images/slide-1.jpg" alt="" height="230">
+									</figure>
+									<h3 class="feature-title">Gaming is your new reality</h3>
+									<p>We don't like when happy times end. So we decided to never let that happen. With that in mind, we've developed ways to constantly be connected to our network. Forever improving your reputation and adding to the endless amount of currency you may have.</p>
+								</div> <!-- .feature -->
+							</div>
+							<div class="col-md-4">
+								<div class="feature">
+									<figure class="cut-corner">
+										<img src="/images/slide-2.jpg" alt="">
+									</figure>
+									<h3 class="feature-title">Adult Content</h3>
+									<p>We understand both kids and adults vary in mindsets and personalities, and we encourage each and every one of them to be themselves. Adult Content doesn't just classify as NSFW, it means being yourself in an environment that won't judge you for being you!</p>
+								</div> <!-- .feature -->
+							</div>
+							<div class="col-md-4">
+								<div class="feature">
+									<figure class="cut-corner">
+										<img src="/images/slide-1.jpg" alt="">
+									</figure>
+									<h3 class="feature-title">Game Server Galore</h3>
+									<p>Games vary in genre and type. We like to explore them all. That's why with every chance we get, we incoorperate our own community into all kinds of game genres and types. Currently we host a variety of Garry's Mod Servers, as well as a casual CS:GO Server and more to come!</p>
+								</div> <!-- .feature -->
+							</div>
+						</div>
+					</div> <!-- .container -->
+				</div> <!-- .why-chooseus-section -->
+			</main> <!-- .main-content -->
+
+			<% if(!user.ngid) { %>
+				<% include ../partials/footer.ejs %>
+			<% } else { %>
+				<% include ../partials/lfooter.ejs %>
+			<% } %>
+
+		</div> <!-- #site-content -->
+
+	<div id="hoverprofilecard" class="map-wrapper">
+		<address>
+			<div class="row">
+				<div class="col-sm-6">
+					<strong id="hoverprofile-username">Loading..</strong>
+					<p id="hoverprofile-rank">Loading</p>
+					
+				</div>
+				<div class="col-sm-6">
+					<a id="hoverprofile-email" href="mailto:reality@nrsi.me">Loading..</a> <br>
+					<a id="hoverprofile-message" href="#">Loading..</a>
+				</div>
+			</div>
+		</address>
+	</div>
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>		
+		<script src="/js/plugins.js"></script>
+		<script src="/js/app.js"></script>
+		<script src="/js/pages/hoverprofile.js"></script>
+		
+	</body>
+
+</html>

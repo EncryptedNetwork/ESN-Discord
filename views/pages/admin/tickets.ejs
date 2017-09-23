@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+
+		<% include ../../partials/header.ejs %>
+		<title>Native Gaming - Support Tickets</title>
+
+	</head>
+
+	<body>
+		
+		<div id="site-content">
+			<header class="site-header">
+				<div class="container">
+					<% include ../../partials/logo.ejs %>
+					
+					<nav class="main-navigation">
+						<button type="button" class="toggle-menu"><i class="fa fa-bars"></i></button>
+						<ul class="menu">
+							<li class="menu-item"><a href="/">Home</a></li>
+							<li class="menu-item"><a href="/about">About</a></li>
+							<li class="menu-item"><a href="/media">Media</a></li>
+							<li class="menu-item"><a href="/shop">Shop</a></li>
+							<li class="menu-item"><a href="/news">News</a></li>
+							<li class="menu-item"><a href="/ticketly">Application</a></li>
+							<li class="menu-item current-menu-item"><a href="/support">Support</a></li>
+							<% if(user.ngid) { %><li class="menu-item"><a href="<%= user.profile %>" >Profile</a></li><% } else { %><li class="menu-item"><a href="/login" >Login/Signup</a></li><% } %>
+						</ul> <!-- .menu -->
+					</nav> <!-- .main-navigation -->
+					<div class="mobile-menu"></div>
+				</div>
+			</header> <!-- .site-header -->
+			
+			<main class="main-content">
+				<div class="fullwidth-block inner-content">
+					<div class="container">
+						<div class="row">
+							
+							<div class="col-md-4">
+                                <aside class="sidebar">
+                                    <div class="widget">
+                                        <h3 class="widget-title">Support Tickets</h3>
+
+                                        <div class="filter-links filterable-nav">
+								            <a href="#" class="current" id="pending">Pending</a>
+								            <a href="#" id="accepted">Under Review</a>
+								            <a href="#" id="denied">Completed</a>
+							            </div>
+
+                                    <% if(tickets) { %>
+                                        <ul class="discography-list">
+                                            <% if (tickets.one) { %><li>
+                                                <figure id="1" ticketid="<% if (tickets.one) { %><%= tickets.one.ticketid %><% } %>" class="cover ticket"><img src="/images/thumbnail-1.png" alt="thumbnail 1"></figure>
+                                                <div class="detail">
+                                                    <h3><a ticketid="<% if (tickets.one) { %><%= tickets.one.ticketid %><% } %>" class="ticket" href="#"><% if (tickets.one) { %><%= tickets.one.name %><% } %></a></h3>
+                                                    <span class="year"><% if (tickets.one) { %><%= tickets.one.state %><% } %></span>
+                                                    <span class="track"><% if (tickets.one) { %><%= tickets.one.email %><% } %></span>
+                                                </div>
+                                            </li><% } %>
+                                            <% if (tickets.two) { %><li>
+                                                <figure id="2" ticketid="<% if (tickets.two) { %><%= tickets.two.ticketid %><% } %>" class="cover ticket"><img src="/images/thumbnail-2.png" alt="thumbnail 2"></figure>
+                                                <div class="detail">
+                                                    <h3><a ticketid="<% if (tickets.two) { %><%= tickets.two.ticketid %><% } %>" class="ticket" href="#"><% if (tickets.two) { %><%= tickets.two.name %><% } %></a></h3>
+                                                    <span class="year"><% if (tickets.two) { %><%= tickets.two.state %><% } %></span>
+                                                    <span class="track"><% if (tickets.two) { %><%= tickets.two.email %><% } %></span>
+                                                </div>
+                                            </li><% } %>
+                                            <% if (tickets.three) { %><li>
+                                                <figure id="3" ticketid="<% if (tickets.three) { %><%= tickets.three.ticketid %><% } %>" class="cover ticket"><img src="/images/thumbnail-3.png" alt="thumbnail 3"></figure>
+                                                <div class="detail">
+                                                    <h3><a ticketid="<% if (tickets.three) { %><%= tickets.three.ticketid %><% } %>" class="ticket" href="#"><% if (tickets.three) { %><%= tickets.three.name %><% } %></a></h3>
+                                                    <span class="year"><% if (tickets.three) { %><%= tickets.three.state %><% } %></span>
+                                                    <span class="track"><% if (tickets.three) { %><%= tickets.three.email %><% } %></span>
+                                                </div>
+                                            </li><% } %>
+                                            <% if (tickets.four) { %><li>
+                                                <figure id="4" ticketid="<% if (tickets.four) { %><%= tickets.four.ticketid %><% } %>" class="cover ticket"><img src="/images/thumbnail-4.png" alt="thumbnail 4"></figure>
+                                                <div class="detail">
+                                                    <h3><a ticketid="<% if (tickets.four) { %><%= tickets.four.ticketid %><% } %>" class="ticket" href="#"><% if (tickets.four) { %><%= tickets.four.name %><% } %></a></h3>
+                                                    <span class="year"><% if (tickets.four) { %><%= tickets.four.state %><% } %></span>
+                                                    <span class="track"><% if (tickets.four) { %><%= tickets.four.email %><% } %></span>
+                                                </div>
+                                            </li><% } %>
+                                            <% if (tickets.five) { %><li>
+                                                <figure id="5" ticketid="<% if (tickets.five) { %><%= tickets.five.ticketid %><% } %>" class="cover ticket"><img src="/images/thumbnail-5.png" alt="thumbnail 5"></figure>
+                                                <div class="detail">
+                                                    <h3><a ticketid="<% if (tickets.five) { %><%= tickets.five.ticketid %><% } %>" class="ticket" href="#"><% if (tickets.five) { %><%= tickets.five.name %><% } %></a></h3>
+                                                    <span class="year"><% if (tickets.five) { %><%= tickets.five.state %><% } %></span>
+                                                    <span class="track"><% if (tickets.five) { %><%= tickets.five.email %><% } %></span>
+                                                </div>
+                                            </li><% } %>
+                                            <% if (tickets.six) { %><li>
+                                                <figure id="6" ticketid="<% if (tickets.six) { %><%= tickets.six.ticketid %><% } %>" class="cover ticket"><img src="/images/thumbnail-5.png" alt="thumbnail 5"></figure>
+                                                <div class="detail">
+                                                    <h3><a ticketid="<% if (tickets.six) { %><%= tickets.six.ticketid %><% } %>" class="ticket" href="#"><% if (tickets.six) { %><%= tickets.six.name %><% } %></a></h3>
+                                                    <span class="year"><% if (tickets.six) { %><%= tickets.six.state %><% } %></span>
+                                                    <span class="track"><% if (tickets.six) { %><%= tickets.six.email %><% } %></span>
+                                                </div>
+                                            </li><% } %>
+                                            <% if (tickets.seven) { %><li>
+                                                <figure id="7" ticketid="<% if (tickets.seven) { %><%= tickets.seven.ticketid %><% } %>" class="cover ticket"><img src="/images/thumbnail-5.png" alt="thumbnail 5"></figure>
+                                                <div class="detail">
+                                                    <h3><a ticketid="<% if (tickets.seven) { %><%= tickets.seven.ticketid %><% } %>" class="ticket" href="#"><% if (tickets.seven) { %><%= tickets.seven.name %><% } %></a></h3>
+                                                    <span class="year"><% if (tickets.seven) { %><%= tickets.seven.state %><% } %></span>
+                                                    <span class="track"><% if (tickets.seven) { %><%= tickets.seven.email %><% } %></span>
+                                                </div>
+                                            </li><% } %>
+                                            <% if (tickets.eight) { %><li>
+                                                <figure id="8" ticketid="<% if (tickets.eight) { %><%= tickets.eight.ticketid %><% } %>" class="cover ticket"><img src="/images/thumbnail-5.png" alt="thumbnail 5"></figure>
+                                                <div class="detail">
+                                                    <h3><a ticketid="<% if (tickets.eight) { %><%= tickets.eight.ticketid %><% } %>" class="ticket" href="#"><% if (tickets.eight) { %><%= tickets.eight.name %><% } %></a></h3>
+                                                    <span class="year"><% if (tickets.eight) { %><%= tickets.eight.state %><% } %></span>
+                                                    <span class="track"><% if (tickets.eight) { %><%= tickets.eight.email %><% } %></span>
+                                                </div>
+                                            </li><% } %>
+                                            <% if (tickets.nine) { %><li>
+                                                <figure id="9" ticketid="<% if (tickets.nine) { %><%= tickets.nine.ticketid %><% } %>" class="cover ticket"><img src="/images/thumbnail-5.png" alt="thumbnail 5"></figure>
+                                                <div class="detail">
+                                                    <h3><a ticketid="<% if (tickets.ten) { %><%= tickets.nine.ticketid %><% } %>" class="ticket" href="#"><% if (tickets.nine) { %><%= tickets.nine.name %><% } %></a></h3>
+                                                    <span class="year"><% if (tickets.ten) { %><%= tickets.nine.state %><% } %></span>
+                                                    <span class="track"><% if (tickets.ten) { %><%= tickets.nine.email %><% } %></span>
+                                                </div>
+                                            </li><% } %>
+                                            <% if (tickets.ten) { %><li>
+                                                <figure id="10" ticketid="<% if (tickets.ten) { %><%= tickets.ten.ticketid %><% } %>" class="cover ticket"><img src="/images/thumbnail-5.png" alt="thumbnail 5"></figure>
+                                                <div class="detail">
+                                                    <h3><a ticketid="<% if (tickets.ten) { %><%= tickets.ten.ticketid %><% } %>" class="ticket" href="#"><% if (tickets.ten) { %><%= tickets.ten.name %><% } %></a></h3>
+                                                    <span class="year"><% if (tickets.ten) { %><%= tickets.ten.state %><% } %></span>
+                                                    <span class="track"><% if (tickets.ten) { %><%= tickets.ten.email %><% } %></span>
+                                                </div>
+                                            </li><% } %>
+                                        </ul>
+                                        <% } else { %>
+                                            <p>No tickets to show.</p>
+                                        <% } %>
+                                    </div>
+                                </aside>
+                            </div>
+ 
+                            <div class="col-md-7">
+                                <div class="content">
+                                    <h2 id="ticket-title" special="<% if (tickets.special) { %><%= tickets.special.ticketid %><% } %>" ticketid="<% if (tickets.special) { %><%= tickets.special.ticketid %><% } %>" class="entry-title"><% if (tickets.special) { %><%= tickets.special.name %><% } %></h2>
+ 
+                                    <h3 class="leading">Name:</h3>
+                                    <p id="ticket-name"><% if (tickets.special) { %><%= tickets.special.name %><% } %></p>
+ 
+                                    <p class="leading">Email:</p>
+                                    <p id="ticket-email"><% if (tickets.special) { %><%= tickets.special.email %><% } %></p>
+ 
+                                    <p class="leading">Steam Profile:</p>
+                                    <p id="ticket-steamprofile"><% if (tickets.special) { %><%= tickets.special.steamprofile %><% } %></p>
+ 
+                                    <p class="leading">Type:</p>
+                                    <p id="ticket-type"><% if (tickets.special) { %><%= tickets.special.type %><% } %></p>
+ 
+                                    <p class="leading">Issue:</p>
+                                    <p id="ticket-issue"><% if (tickets.special) { %><%= tickets.special.issue %><% } %></p>
+ 
+                                    <p class="leading">Other notes:</p>
+                                    <p id="ticket-other"><% if (tickets.special) { %><%= tickets.special.other %><% } %></p>
+									
+                                    <textarea id="ticket-reply" name="#" placeholder="Your reply."></textarea>
+                                    <br>
+									<a id="reply" class="button small primary">Reply</a>
+                                    <br><br>
+									<a id="accept" class="button small secondary">Complete Ticket</a>
+                                    <a id="accept" class="button small secondary">Report Ticket</a>
+                                </div>
+                            </div>
+							
+						</div>
+					</div>
+				</div> <!-- .testimonial-section -->
+
+				
+			</main> <!-- .main-content -->
+
+			<% if(!user.ngid) { %>
+				<% include ../../partials/footer.ejs %>
+			<% } else { %>
+				<% include ../../partials/lfooter.ejs %>
+			<% } %>
+
+		</div> <!-- #site-content -->
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>		
+		<script src="/js/pages/tickets.js"></script>
+	</body>
+
+</html>

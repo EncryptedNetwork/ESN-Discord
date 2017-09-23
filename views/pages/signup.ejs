@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+
+		<% include ../partials/header.ejs %>
+		<title>Native Gaming - Apply for Staff</title>
+
+	</head>
+
+	<body>
+		
+		<div id="site-content">
+			<header class="site-header">
+				<div class="container">
+					<% include ../partials/logo.ejs %>
+					
+					<nav class="main-navigation">
+						<button type="button" class="toggle-menu"><i class="fa fa-bars"></i></button>
+						<ul class="menu">
+							<li class="menu-item"><a href="/">Home</a></li>
+							<li class="menu-item"><a href="/about">About</a></li>
+							<li class="menu-item"><a href="/media">Media</a></li>
+							<li class="menu-item"><a href="/shop">Shop</a></li>
+							<li class="menu-item"><a href="/news">News</a></li>
+							<li class="menu-item"><a href="/apply">Application</a></li>
+							<li class="menu-item"><a href="/support">Support</a></li>
+							<% if(user.ngid) { %><li class="menu-item"><a href="<%= user.profile %>" >Profile</a></li><% } else { %><li class="menu-item"><a href="/login" >Login/Signup</a></li><% } %>
+						</ul> <!-- .menu -->
+					</nav> <!-- .main-navigation -->
+					<div class="mobile-menu"></div>
+				</div>
+			</header> <!-- .site-header -->
+			
+			<main class="main-content">
+				<div class="fullwidth-block inner-content">
+					<div class="container">
+						<h2 class="page-title">Signup</h2>
+						<p id="app-info">If you have previously signed-up via Discord, your account has been deleted. Please recreate it here.</p>
+						<div class="row">
+							<div class="applicationarea">
+								<form id="native-signup" action="#" class="contact-form">
+									<p>Username: <small>(you can always change it later)</small></p>
+									<input id="form-username" type="text" placeholder="Your username..">
+
+									<p>Email:</p>
+									<input id="form-email" type="email" placeholder="Email..">
+
+									<p>Password:</p>
+									<input id="form-pass" type="password" placeholder="Password..">
+
+									<p>Confirm Password:</p>
+									<input id="form-pass2" type="password" placeholder="Confirm Password..">
+
+
+									<input id="form-signup" type="submit" value="Signup">
+								</form>
+							</div>
+							<p>Already have an account? <a class="themecolor" href="/login">Login</a></p>
+						</div>
+					</div>
+				</div> <!-- .testimonial-section -->
+
+				
+			</main> <!-- .main-content -->
+
+			<% if(!user.ngid) { %>
+				<% include ../partials/footer.ejs %>
+			<% } else { %>
+				<% include ../partials/lfooter.ejs %>
+			<% } %>
+
+		</div> <!-- #site-content -->
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>		
+		<!--<script src="/js/plugins.js"></script>-->
+		<!--<script src="/js/app.js"></script>-->
+		<script src="/js/pages/signup.js"></script>
+		
+	</body>
+
+</html>

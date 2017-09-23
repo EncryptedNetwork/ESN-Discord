@@ -19,17 +19,22 @@ if(firebase.apps.length) {
 }
 
 // FIREBASE DIRECTORY INITIALIZER
-let esndb = firebase.database().ref('esn')
+let esndb = firebase.database().ref('esndb')
+let applications = esndb.child('applications')
 let users = esndb.child('users')
-
-// let ranks = esndb.child('ranks')
+let tokens = esndb.child('tokens')
+let ranks = esndb.child('ranks')
 
 exports.esndb = esndb
+
+exports.newApp = function(appId, application) {
+  application.appid = appId
+  applications.child(appId).update(application)
+}
 
 exports.newDiscordUser = function(discordid, username) {
   let date = new Date()
   let esnid = uid.generateUID()
-  console.log('creating new user with esnid: ' + esnid)
   
   let user = {}
   user.credits = 0
@@ -46,7 +51,6 @@ exports.newDiscordUser = function(discordid, username) {
   users.child(esnid).update(user)
 }
 
-// **DEPRECATED**
 exports.userExists = function(userid) {
   return users.child(userid).once('value').then(userSnapshot => {
     let user = userSnapshot.val()
@@ -66,8 +70,113 @@ exports.getUser = function(userid) {
   })
 }
 
-exports.getUserRank = function(userid) {
-  return users.child(userid).once('value').then(function(userSnapshot) {
+exports.getApplication = function(appid) {
+  return new Promise((resolve, reject) => {
+    return applications.child(appid).once('value').then(appSnapshot => {
+      let appbody = appSnapshot.val()
+      resolve (appbody)
+    })
+  })
+}
+
+const numbers = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"]
+exports.getPendingApplications = function() {
+  return new Promise((resolve, reject) => {
+    var apps = {}
+    var i = 1
+    var max = 0
+
+    return applications.orderByChild('state').equalTo('pending').limitToFirst(10).once('value').then(snapshot => {
+
+      snapshot.forEach(function(childAppSnapshot) {
+        max++
+      })
+
+      return snapshot.forEach(function(childAppSnapshot) {
+        var sub = numbers[i]
+        apps[sub] = childAppSnapshot.val()
+
+        if(i === max) {
+          resolve (apps)
+        }
+
+        i++
+      })
+    })
+  })
+}
+
+exports.getAcceptedApplications = function() {
+  return new Promise((resolve, reject) => {
+    var apps = {}
+    var i = 1
+    var max = 0
+
+    return applications.orderByChild('state').equalTo('accepted').limitToFirst(10).once('value').then(snapshot => {
+
+      snapshot.forEach(function(childAppSnapshot) {
+        max++
+      })
+
+      return snapshot.forEach(function(childAppSnapshot) {
+        var sub = numbers[i]
+        apps[sub] = childAppSnapshot.val()
+
+        if(i === max) {
+          resolve (apps)
+        }
+
+        i++
+      })
+    })
+  })
+}
+
+exports.getDeniedApplications = function() {
+  return new Promise((resolve, reject) => {
+    var apps = {}
+    var i = 1
+    var max = 0
+
+    return applications.orderByChild('state').equalTo('denied').limitToFirst(10).once('value').then(snapshot => {
+
+      snapshot.forEach(function(childAppSnapshot) {
+        max++
+      })
+
+      return snapshot.forEach(function(childAppSnapshot) {
+        var sub = numbers[i]
+        apps[sub] = childAppSnapshot.val()
+
+        if(i === max) {
+          resolve (apps)
+        }
+
+        i++
+      })
+    })
+  })
+}
+
+exports.updateApp = function(appid, update) {
+  return applications.child(appid).update({
+    state: update
+  })
+}
+
+exports.storeToken = function(token, ngid) {
+  return tokens.child(token).update({
+    token: token,
+    ngid: ngid
+  })
+}
+
+exports.getToken = function(token) {
+  return tokens.child(token).once('value').then(tokenSnapshot => tokenSnapshot.val())
+}
+
+exports.getUserRank = function(ngid) {
+  return users.child(ngid).once('value').then(function(userSnapshot) {
     let user = userSnapshot.val()
 
     return ranks.child(user.rank).once('value').then(function(rankSnapshot) {
@@ -75,25 +184,5 @@ exports.getUserRank = function(userid) {
 
       return rank
     })
-  })
-}
-
-exports.getUserByDiscordID = function(discordid) {
-  return new Promise((resolve, reject) => {
-      var max = 0
-      return users.orderByChild('discordid').equalTo(discordid).once('value', function(snapshot) {
-          snapshot.forEach(function(childAppSnapshot) {
-              max++
-          })
-
-          if(max === 0) {
-              resolve(null)
-          }
-          
-          return snapshot.forEach(function(childAppSnapshot) {
-              let user = childAppSnapshot.val()
-              resolve(user)
-          })
-      })
   })
 }

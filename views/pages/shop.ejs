@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+
+		<% include ../partials/header.ejs %>
+		<title>Native Gaming - Shop</title>
+
+	</head>
+
+	<body>
+		
+		<div id="site-content">
+			<header class="site-header">
+				<div class="container">
+					<% include ../partials/logo.ejs %>
+					
+					<nav class="main-navigation">
+						<button type="button" class="toggle-menu"><i class="fa fa-bars"></i></button>
+						<ul class="menu">
+							<li class="menu-item"><a href="/">Home</a></li>
+							<li class="menu-item"><a href="/about">About</a></li>
+							<li class="menu-item"><a href="/media">Media</a></li>
+							<li class="menu-item current-menu-item"><a href="/shop">Shop</a></li>
+							<li class="menu-item"><a href="/news">News</a></li>
+							<li class="menu-item"><a href="/apply">Application</a></li>
+							<li class="menu-item"><a href="/support">Support</a></li>
+							<% if(user.ngid) { %><li class="menu-item"><a href="<%= user.profile %>" >Profile</a></li><% } else { %><li class="menu-item"><a href="/login" >Login/Signup</a></li><% } %>
+						</ul> <!-- .menu -->
+					</nav> <!-- .main-navigation -->
+					<div class="mobile-menu"></div>
+				</div>
+			</header> <!-- .site-header -->
+			
+			<main class="main-content">
+
+				<div class="toast jam" aria-hidden="true">
+					<span class="close" aria-role="button" tabindex="0">&times;</span>
+					Shop is currently under development. If you wish to purchase something, contact support instead.
+				</div>
+
+				<div class="fullwidth-block download">
+					<div class="container">
+						<div class="row">
+							<div class="col-md-5">
+								<h2 class="page-title">Network Products</h2>
+
+
+								<div class="item">
+									<h3 class="item-title">X2 EXP Boost</h3>
+									<span class="year">Recieve a X2 EXP Boost Perk for 2 days across the entire Native Gaming Network. Activate it via our Discord Community with the "~boost exp" command!</span>
+									<a href="#" class="button small primary">Purchase</a>
+									<a href="#" class="button small secondary">Add to Wishlist</a>
+									<div class="social-share">
+										<span>Price: <strong>$3.00 USD</strong></span>
+									</div>
+								</div>
+
+								<div class="item">
+									<h3 class="item-title">X2 Credit Boost</h3>
+									<span class="year">Recieve a X2 Credit Boost Perk for 2 days across the entire Native Gaming Network. Activate it via our Discord Community with the "~boost credit" command!</span>
+									<a href="#" class="button small primary">Purchase</a>
+									<a href="#" class="button small secondary">Add to Wishlist</a>
+									<div class="social-share">
+										<span>Price: <strong>$3.50 USD</strong></span>
+									</div>
+								</div>
+
+								<div class="item">
+									<h3 class="item-title">Discord Custom Channel Ticket</h3>
+									<span class="year">Get your very own channel in the Native Gaming Discord Server! Name it, allow certain people to enter it. It's your empire!</span>
+									<a href="#" class="button small primary">Purchase</a>
+									<a href="#" class="button small secondary">Add to Wishlist</a>
+									<div class="social-share">
+										<span>Price: <strong>$4.00 USD</strong></span>
+									</div>
+								</div>
+
+								<div class="item">
+									<h3 class="item-title">Discord Custom Rank Ticket</h3>
+									<span class="year">Get your very own custom rank! Choose the name, eye the color, and you have a nice little rank for you and your friends (up to 9 other people, not including you) to show off!</span>
+									<a href="#" class="button small primary">Purchase</a>
+									<a href="#" class="button small secondary">Add to Wishlist</a>
+									<div class="social-share">
+										<span>Price: <strong>$5.00 USD</strong></span>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-md-5 col-md-push-2">
+								<h2 class="page-title">Game-Specific Products</h2>
+
+								<div class="item">
+									<h3 class="item-title">TTT Terrorist Chance Boost</h3>
+									<span class="year">Boost the chance of you being the "T" Role permanently by 10%.</span>
+									<a href="#" class="button small primary">Purchase</a>
+									<a href="#" class="button small secondary">Add to Wishlist</a>
+									<div class="social-share">
+										<span>Price: <strong>$7.00 USD</strong></span>
+									</div>
+								</div>
+
+								<div class="item">
+									<h3 class="item-title">TTT Shop Item</h3>
+									<span class="year">Shop item description........</span>
+									<a href="#" class="button small primary">Purchase</a>
+									<a href="#" class="button small secondary">Add to Wishlist</a>
+									<div class="social-share">
+										<span>Price: <strong>$0.00 USD</strong></span>
+									</div>
+								</div>
+
+								<div class="item">
+									<h3 class="item-title">DarkRP Shop Item</h3>
+									<span class="year">Shop item description........</span>
+									<a href="#" class="button small primary">Purchase</a>
+									<a href="#" class="button small secondary">Add to Wishlist</a>
+									<div class="social-share">
+										<span>Price: <strong>$0.00 USD</strong></span>
+									</div>
+								</div>
+
+								<div class="item">
+									<h3 class="item-title">DarkRP Shop Item</h3>
+									<span class="year">Shop item description........</span>
+									<a href="#" class="button small primary">Purchase</a>
+									<a href="#" class="button small secondary">Add to Wishlist</a>
+									<div class="social-share">
+										<span>Price: <strong>$0.00 USD</strong></span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div> <!-- .testimonial-section -->
+
+				
+			</main> <!-- .main-content -->
+
+			<% if(!user.ngid) { %>
+				<% include ../partials/footer.ejs %>
+			<% } else { %>
+				<% include ../partials/lfooter.ejs %>
+			<% } %>
+
+		</div> <!-- #site-content -->
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>		
+		<script src="/js/plugins.js"></script>
+		<script src="/js/app.js"></script>
+		
+	</body>
+
+</html>

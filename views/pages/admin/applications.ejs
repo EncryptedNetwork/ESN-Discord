@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+
+		<% include ../../partials/header.ejs %>
+		<title>Native Gaming - Applications</title>
+
+	</head>
+
+	<body>
+		
+		<div id="site-content">
+			<header class="site-header">
+				<div class="container">
+					<% include ../../partials/logo.ejs %>
+					
+					<nav class="main-navigation">
+						<button type="button" class="toggle-menu"><i class="fa fa-bars"></i></button>
+						<ul class="menu">
+							<li class="menu-item"><a href="/">Home</a></li>
+							<li class="menu-item"><a href="/about">About</a></li>
+							<li class="menu-item"><a href="/media">Media</a></li>
+							<li class="menu-item"><a href="/shop">Shop</a></li>
+							<li class="menu-item"><a href="/news">News</a></li>
+							<li class="menu-item current-menu-item"><a href="/apply">Application</a></li>
+							<li class="menu-item"><a href="/support">Support</a></li>
+							<% if(user.ngid) { %><li class="menu-item"><a href="<%= user.profile %>" >Profile</a></li><% } else { %><li class="menu-item"><a href="/login" >Login/Signup</a></li><% } %>
+						</ul> <!-- .menu -->
+					</nav> <!-- .main-navigation -->
+					<div class="mobile-menu"></div>
+				</div>
+			</header> <!-- .site-header -->
+			
+			<main class="main-content">
+				<div class="fullwidth-block inner-content">
+					<div class="container">
+						<div class="row">
+							
+							<div class="col-md-4">
+                                <aside class="sidebar">
+                                    <div class="widget">
+                                        <h3 class="widget-title">Applications</h3>
+
+                                        <div class="filter-links filterable-nav">
+								            <a href="#" class="current" id="pending">Pending</a>
+								            <a href="#" id="accepted">Accepted</a>
+								            <a href="#" id="denied">Denied</a>
+							            </div>
+
+                                    <% if(apps) { %>
+                                        <ul class="discography-list">
+                                            <% if (apps.one) { %><li>
+                                                <figure id="1" appid="<% if (apps.one) { %><%= apps.one.appid %><% } %>" class="cover app"><img src="/images/thumbnail-1.png" alt="thumbnail 1"></figure>
+                                                <div class="detail">
+                                                    <h3><a appid="<% if (apps.one) { %><%= apps.one.appid %><% } %>" class="app" href="#"><% if (apps.one) { %><%= apps.one.name %><% } %></a></h3>
+                                                    <span class="year"><% if (apps.one) { %><%= apps.one.state %><% } %></span>
+                                                    <span class="track"><% if (apps.one) { %><%= apps.one.email %><% } %></span>
+                                                </div>
+                                            </li><% } %>
+                                            <% if (apps.two) { %><li>
+                                                <figure id="2" appid="<% if (apps.two) { %><%= apps.two.appid %><% } %>" class="cover app"><img src="/images/thumbnail-2.png" alt="thumbnail 2"></figure>
+                                                <div class="detail">
+                                                    <h3><a appid="<% if (apps.two) { %><%= apps.two.appid %><% } %>" class="app" href="#"><% if (apps.two) { %><%= apps.two.name %><% } %></a></h3>
+                                                    <span class="year"><% if (apps.two) { %><%= apps.two.state %><% } %></span>
+                                                    <span class="track"><% if (apps.two) { %><%= apps.two.email %><% } %></span>
+                                                </div>
+                                            </li><% } %>
+                                            <% if (apps.three) { %><li>
+                                                <figure id="3" appid="<% if (apps.three) { %><%= apps.three.appid %><% } %>" class="cover app"><img src="/images/thumbnail-3.png" alt="thumbnail 3"></figure>
+                                                <div class="detail">
+                                                    <h3><a appid="<% if (apps.three) { %><%= apps.three.appid %><% } %>" class="app" href="#"><% if (apps.three) { %><%= apps.three.name %><% } %></a></h3>
+                                                    <span class="year"><% if (apps.three) { %><%= apps.three.state %><% } %></span>
+                                                    <span class="track"><% if (apps.three) { %><%= apps.three.email %><% } %></span>
+                                                </div>
+                                            </li><% } %>
+                                            <% if (apps.four) { %><li>
+                                                <figure id="4" appid="<% if (apps.four) { %><%= apps.four.appid %><% } %>" class="cover app"><img src="/images/thumbnail-4.png" alt="thumbnail 4"></figure>
+                                                <div class="detail">
+                                                    <h3><a appid="<% if (apps.four) { %><%= apps.four.appid %><% } %>" class="app" href="#"><% if (apps.four) { %><%= apps.four.name %><% } %></a></h3>
+                                                    <span class="year"><% if (apps.four) { %><%= apps.four.state %><% } %></span>
+                                                    <span class="track"><% if (apps.four) { %><%= apps.four.email %><% } %></span>
+                                                </div>
+                                            </li><% } %>
+                                            <% if (apps.five) { %><li>
+                                                <figure id="5" appid="<% if (apps.five) { %><%= apps.five.appid %><% } %>" class="cover app"><img src="/images/thumbnail-5.png" alt="thumbnail 5"></figure>
+                                                <div class="detail">
+                                                    <h3><a appid="<% if (apps.five) { %><%= apps.five.appid %><% } %>" class="app" href="#"><% if (apps.five) { %><%= apps.five.name %><% } %></a></h3>
+                                                    <span class="year"><% if (apps.five) { %><%= apps.five.state %><% } %></span>
+                                                    <span class="track"><% if (apps.five) { %><%= apps.five.email %><% } %></span>
+                                                </div>
+                                            </li><% } %>
+                                            <% if (apps.six) { %><li>
+                                                <figure id="6" appid="<% if (apps.six) { %><%= apps.six.appid %><% } %>" class="cover app"><img src="/images/thumbnail-5.png" alt="thumbnail 5"></figure>
+                                                <div class="detail">
+                                                    <h3><a appid="<% if (apps.six) { %><%= apps.six.appid %><% } %>" class="app" href="#"><% if (apps.six) { %><%= apps.six.name %><% } %></a></h3>
+                                                    <span class="year"><% if (apps.six) { %><%= apps.six.state %><% } %></span>
+                                                    <span class="track"><% if (apps.six) { %><%= apps.six.email %><% } %></span>
+                                                </div>
+                                            </li><% } %>
+                                            <% if (apps.seven) { %><li>
+                                                <figure id="7" appid="<% if (apps.seven) { %><%= apps.seven.appid %><% } %>" class="cover app"><img src="/images/thumbnail-5.png" alt="thumbnail 5"></figure>
+                                                <div class="detail">
+                                                    <h3><a appid="<% if (apps.seven) { %><%= apps.seven.appid %><% } %>" class="app" href="#"><% if (apps.seven) { %><%= apps.seven.name %><% } %></a></h3>
+                                                    <span class="year"><% if (apps.seven) { %><%= apps.seven.state %><% } %></span>
+                                                    <span class="track"><% if (apps.seven) { %><%= apps.seven.email %><% } %></span>
+                                                </div>
+                                            </li><% } %>
+                                            <% if (apps.eight) { %><li>
+                                                <figure id="8" appid="<% if (apps.eight) { %><%= apps.eight.appid %><% } %>" class="cover app"><img src="/images/thumbnail-5.png" alt="thumbnail 5"></figure>
+                                                <div class="detail">
+                                                    <h3><a appid="<% if (apps.eight) { %><%= apps.eight.appid %><% } %>" class="app" href="#"><% if (apps.eight) { %><%= apps.eight.name %><% } %></a></h3>
+                                                    <span class="year"><% if (apps.eight) { %><%= apps.eight.state %><% } %></span>
+                                                    <span class="track"><% if (apps.eight) { %><%= apps.eight.email %><% } %></span>
+                                                </div>
+                                            </li><% } %>
+                                            <% if (apps.nine) { %><li>
+                                                <figure id="9" appid="<% if (apps.nine) { %><%= apps.nine.appid %><% } %>" class="cover app"><img src="/images/thumbnail-5.png" alt="thumbnail 5"></figure>
+                                                <div class="detail">
+                                                    <h3><a appid="<% if (apps.ten) { %><%= apps.nine.appid %><% } %>" class="app" href="#"><% if (apps.nine) { %><%= apps.nine.name %><% } %></a></h3>
+                                                    <span class="year"><% if (apps.ten) { %><%= apps.nine.state %><% } %></span>
+                                                    <span class="track"><% if (apps.ten) { %><%= apps.nine.email %><% } %></span>
+                                                </div>
+                                            </li><% } %>
+                                            <% if (apps.ten) { %><li>
+                                                <figure id="10" appid="<% if (apps.ten) { %><%= apps.ten.appid %><% } %>" class="cover app"><img src="/images/thumbnail-5.png" alt="thumbnail 5"></figure>
+                                                <div class="detail">
+                                                    <h3><a appid="<% if (apps.ten) { %><%= apps.ten.appid %><% } %>" class="app" href="#"><% if (apps.ten) { %><%= apps.ten.name %><% } %></a></h3>
+                                                    <span class="year"><% if (apps.ten) { %><%= apps.ten.state %><% } %></span>
+                                                    <span class="track"><% if (apps.ten) { %><%= apps.ten.email %><% } %></span>
+                                                </div>
+                                            </li><% } %>
+                                        </ul>
+                                        <% } else { %>
+                                            <p>No apps to show.</p>
+                                        <% } %>
+                                    </div>
+                                </aside>
+                            </div>
+ 
+                            <div class="col-md-7">
+                                <div class="content">
+                                    <h2 id="app-title" special="<% if (apps.special) { %><%= apps.special.appid %><% } %>" appid="<% if (apps.special) { %><%= apps.special.appid %><% } %>" class="entry-title"><% if (apps.special) { %><%= apps.special.name %><% } %></h2>
+ 
+                                    <h3 class="leading">Name:</h3>
+                                    <p id="app-name"><% if (apps.special) { %><%= apps.special.name %><% } %></p>
+ 
+                                    <p class="leading">Email:</p>
+                                    <p id="app-email"><% if (apps.special) { %><%= apps.special.email %><% } %></p>
+ 
+                                    <p class="leading">Steam Profile:</p>
+                                    <p id="app-steamprofile"><% if (apps.special) { %><%= apps.special.steamprofile %><% } %></p>
+ 
+                                    <p class="leading">Position:</p>
+                                    <p id="app-position"><% if (apps.special) { %><%= apps.special.position %><% } %></p>
+ 
+                                    <p class="leading">Network Part:</p>
+                                    <p id="app-netpos"><% if (apps.special) { %><%= apps.special.netpos %><% } %></p>
+ 
+                                    <p class="leading">Why should you be staff? What makes you different from other applicants?</p>
+                                    <p id="app-why"><% if (apps.special) { %><%= apps.special.why %><% } %></p>
+ 
+                                    <p class="leading">Do you have previous staffing experience? If so, explain your experiences.</p>
+                                    <p id="app-pastexp"><% if (apps.special) { %><%= apps.special.pastexp %><% } %></p>
+ 
+                                    <p class="leading">Describe your personality. We strive to have a fun and outgoing staff team at all times. We gotta make sure you're right for the job!</p>
+                                    <p id="app-personality"><% if (apps.special) { %><%= apps.special.personality %><% } %></p>
+
+									
+									<a id="deny" class="button small primary">Deny</a>
+									<a id="accept" class="button small secondary">Accept</a>
+                                </div>
+                            </div>
+							
+						</div>
+					</div>
+				</div> <!-- .testimonial-section -->
+
+				
+			</main> <!-- .main-content -->
+
+			<% if(!user.ngid) { %>
+				<% include ../../partials/footer.ejs %>
+			<% } else { %>
+				<% include ../../partials/lfooter.ejs %>
+			<% } %>
+
+		</div> <!-- #site-content -->
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>		
+		<script src="/js/pages/applications.js"></script>
+	</body>
+
+</html>
