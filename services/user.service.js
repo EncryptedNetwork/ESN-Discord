@@ -1,82 +1,82 @@
 const db = require('./db.service')
 const esndb = db.esndb
-const bcryptpromise = require('../utils/bcryptpromise')
+// const bcryptpromise = require('../utils/bcryptpromise')
 const uid = require('../utils/uid')
 
 let users = esndb.child('users')
 
-exports.authenticateUser = function(email, password) {
-    return this.getUserByEmail(email).then((user) => {
-        // DOES USER EXIST?
-        if(user) {
+// exports.authenticateUser = function(email, password) {
+//     return this.getUserByEmail(email).then((user) => {
+//         // DOES USER EXIST?
+//         if(user) {
 
-            return bcryptpromise.compare(password, user.password).then((valid) => {
-                if(valid) {
-                    let token = uid.generateToken()
-                    db.storeToken(token, user.ngid)
-                    let data = {
-                        status: 'success',
-                        message: 'Verified',
-                        token: token,
-                        ngid: user.ngid
-                    }
-                    return data
-                    } else {
-                        let data = {
-                            status: 'error',
-                            message: 'Username/Password Incorrect'
-                        }
-                        return data
-                    }
-            })
-        } else {
-            let data = {
-                status: 'error',
-                message: 'Username/Password Incorrect'
-            }
-            return data
-        }     
-    })
-}
+//             return bcryptpromise.compare(password, user.password).then((valid) => {
+//                 if(valid) {
+//                     let token = uid.generateToken()
+//                     db.storeToken(token, user.esnid)
+//                     let data = {
+//                         status: 'success',
+//                         message: 'Verified',
+//                         token: token,
+//                         esnid: user.esnid
+//                     }
+//                     return data
+//                     } else {
+//                         let data = {
+//                             status: 'error',
+//                             message: 'Username/Password Incorrect'
+//                         }
+//                         return data
+//                     }
+//             })
+//         } else {
+//             let data = {
+//                 status: 'error',
+//                 message: 'Username/Password Incorrect'
+//             }
+//             return data
+//         }     
+//     })
+// }
 
-exports.createUser = function(email, password, username) {
-    return this.getUserByEmail(email).then((user) => {
+// exports.createUser = function(email, password, username) {
+//     return this.getUserByEmail(email).then((user) => {
 
-        if(user) {
-            let data = {
-                status: 'error',
-                message: "Error, user with that email already exists."
-            }
-            return data
-        } else {
-            return bcryptpromise.hash(password).then((hashedPass) => {
-                    let ngid = uid.generateAppUID()
-                    let date = new Date()
-                    users.child(ngid).update({
-                        email: email,
-                        username: username,
-                        password: hashedPass,
-                        creationdate: date,
-                        level: 0,
-                        exp: 0,
-                        expup: 100,
-                        totalexp: 0, 
-                        credits: 100, 
-                        rank: "user", 
-                        ngid: ngid,
-                        achievements: "*None yet*", 
-                        profilebarcolor: "9807270"
-                    })
-                    let data = {
-                        status: 'success',
-                        message: "User created.",
-                        ngid: ngid
-                    }
-                    return data
-            })
-        }
-    })
-}
+//         if(user) {
+//             let data = {
+//                 status: 'error',
+//                 message: "Error, user with that email already exists."
+//             }
+//             return data
+//         } else {
+//             return bcryptpromise.hash(password).then((hashedPass) => {
+//                     let esnid = uid.generateAppUID()
+//                     let date = new Date()
+//                     users.child(esnid).update({
+//                         email: email,
+//                         username: username,
+//                         password: hashedPass,
+//                         creationdate: date,
+//                         level: 0,
+//                         exp: 0,
+//                         expup: 100,
+//                         totalexp: 0, 
+//                         credits: 100, 
+//                         rank: "user", 
+//                         esnid: esnid,
+//                         achievements: "*None yet*", 
+//                         profilebarcolor: "9807270"
+//                     })
+//                     let data = {
+//                         status: 'success',
+//                         message: "User created.",
+//                         esnid: esnid
+//                     }
+//                     return data
+//             })
+//         }
+//     })
+// }
 
 exports.getUserByEmail = function(email) {
     return users.orderByChild('email').equalTo(email).once('value').then(function(userSnapshot) {
@@ -120,9 +120,9 @@ exports.getUserByDiscordID = function(discordid) {
 //     })
 // }
 
-exports.getUserByNGID = function(ngid) {
+exports.getUserByESNID = function(esnid) {
     return new Promise((resolve, reject) => {
-        return users.orderByChild('ngid').equalTo(ngid).once('value', (snapshot) => {
+        return users.orderByChild('esnid').equalTo(esnid).once('value', (snapshot) => {
             return snapshot.forEach(function(childAppSnapshot) {
                 let user = childAppSnapshot.val()
                 resolve(user)
@@ -131,41 +131,14 @@ exports.getUserByNGID = function(ngid) {
     })
 }
 
-exports.generateDiscordAuthCode = function(ngid, discordid) {
+exports.verifyDiscordUser = function(esnid, code) {
     return new Promise((resolve, reject) => {
-        return users.orderByChild('ngid').equalTo(ngid).once('value', function(userSnapshot) {
-            let user = userSnapshot.val()
-            if(user) {
-                let authCode = uid.generateAppUID()
-                users.child(ngid).update({
-                    discordAuth: authCode,
-                    udiscordid: discordid
-                })
-                let msg = {
-                    msg: "Success! Please finish the verification process.",
-                    discordAuthCode: authCode,
-                    code: '200 C'
-                }
-                return resolve(msg)
-            } else {
-                let msg = {
-                    code: '404 F',
-                    error: "User does not exist on NG Network."
-                }
-                return resolve(msg)
-            }
-        })
-    })
-}
-
-exports.verifyDiscordUser = function(ngid, code) {
-    return new Promise((resolve, reject) => {
-        return this.getUserByNGID(ngid).then((user) => {
+        return this.getUserByESNID(esnid).then((user) => {
 
             if(user) {
                 if(user.discordAuth === code) {
                     let verifiedId = user.udiscordid
-                    users.child(ngid).update({
+                    users.child(esnid).update({
                         discordid: verifiedId,
                         discordAuth: null,
                         udiscordid: null
