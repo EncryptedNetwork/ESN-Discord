@@ -1,6 +1,5 @@
 // Service Startups
 require('./services/server.service')
-require('./services/steam.service')
 require('./services/db.service')
 
 // Error Handlers
