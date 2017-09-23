@@ -8,7 +8,7 @@ router.use((req, res, next) => {
         let token = req.cookies.token
         db.getToken(token).then((tokenEntry) => {
             if(tokenEntry) {
-                req.userid = tokenEntry.ngid
+                req.userid = tokenEntry.esnid
             }
             next()
             return
@@ -32,7 +32,7 @@ router.use((req, res, next) => {
                 message: 'You do not have sufficient permissions to view this page. RIP.',
             },
             user: { 
-                ngid: req.userid, 
+                esnid: req.userid, 
                 profile: '/user/' + req.userid 
             }
             })
@@ -46,7 +46,7 @@ router.use((req, res, next) => {
                 message: 'You do not have sufficient permissions to view this page. RIP.'
             },
             user: { 
-                ngid: req.userid, 
+                esnid: req.userid, 
                 profile: '/user/' + req.userid 
             }
             })
@@ -55,7 +55,7 @@ router.use((req, res, next) => {
 })
 
 router.get('/', (req, res, next) => {
-    res.render('pages/admin/admin',  { user: { ngid: req.userid, profile: '/user/' + req.userid }})
+    res.render('pages/admin/admin',  { user: { esnid: req.userid, profile: '/user/' + req.userid }})
 })
 
 router.use('/apps', require('./applications'))

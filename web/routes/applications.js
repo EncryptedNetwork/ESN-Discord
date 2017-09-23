@@ -10,7 +10,7 @@ router.use((req, res, next) => {
         let token = req.cookies.token
         db.getToken(token).then((tokenEntry) => {
             if(tokenEntry) {
-                req.userid = tokenEntry.ngid
+                req.userid = tokenEntry.esnid
             }
             next()
             return
@@ -24,7 +24,7 @@ router.use((req, res, next) => {
 router.get('/', (req, res, next) => {
     db.getPendingApplications().then((apps) => {
         res.render('pages/admin/applications',  { user: { 
-            ngid: req.userid, 
+            esnid: req.userid, 
             profile: '/user/' + req.userid 
             },
             apps: apps
@@ -56,7 +56,7 @@ router.get('/:appid', (req, res, next) => {
             apps.special = appbody
             
             res.render('pages/admin/applications',  { user: { 
-            ngid: req.userid, 
+            esnid: req.userid, 
             profile: '/user/' + req.userid 
             },
             apps: apps

@@ -11,7 +11,7 @@ router.use((req, res, next) => {
         let token = req.cookies.token
         db.getToken(token).then((tokenEntry) => {
             if(tokenEntry) {
-                req.userid = tokenEntry.ngid
+                req.userid = tokenEntry.esnid
             }
             next()
             return
@@ -25,7 +25,7 @@ router.use((req, res, next) => {
 router.get('/', (req, res, next) => {
     supportService.getPendingTickets().then((tickets) => {
         res.render('pages/admin/tickets',  { user: { 
-            ngid: req.userid, 
+            esnid: req.userid, 
             profile: '/user/' + req.userid 
             },
             tickets: tickets
@@ -57,7 +57,7 @@ router.get('/:ticketid', (req, res, next) => {
             tickets.special = ticketbody
             
             res.render('pages/admin/tickets',  { user: { 
-            ngid: req.userid, 
+            esnid: req.userid, 
             profile: '/user/' + req.userid 
             },
             tickets: tickets

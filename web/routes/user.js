@@ -8,7 +8,7 @@ router.use((req, res, next) => {
         let token = req.cookies.token
         db.getToken(token).then((tokenEntry) => {
             if(tokenEntry) {
-                req.userid = tokenEntry.ngid
+                req.userid = tokenEntry.esnid
             }
             next()
             return
@@ -28,9 +28,9 @@ router.get('/:userid', (req, res, next) => {
         console.log(user)
         if(user) {
             if(req.userid === userid) {
-                res.render('pages/profile',  { target: user, user: { ngid: req.userid, profile: '/user/' + req.userid, own: true }})
+                res.render('pages/profile',  { target: user, user: { esnid: req.userid, profile: '/user/' + req.userid, own: true }})
             } else {
-                res.render('pages/profile',  { target: user, user: { ngid: req.userid, profile: '/user/' + req.userid, own: false }})
+                res.render('pages/profile',  { target: user, user: { esnid: req.userid, profile: '/user/' + req.userid, own: false }})
             }
         } else {
             console.log('user does not exist')

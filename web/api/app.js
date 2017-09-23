@@ -10,7 +10,7 @@ router.use((req, res, next) => {
         let token = req.cookies.token
         db.getToken(token).then((tokenEntry) => {
             if(tokenEntry) {
-                req.userid = tokenEntry.ngid
+                req.userid = tokenEntry.esnid
             }
             next()
             return
@@ -57,7 +57,7 @@ router.post('/newApp', (req, res, next) => {
             personality: personality,
             date: date,
             state: state,
-            ngid: req.userid
+            esnid: req.userid
         }
         
         db.newApp(key, application)

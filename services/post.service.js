@@ -1,9 +1,9 @@
 const db = require('./db.service')
-const ngdb = db.ngdb
+const esndb = db.esndb
 const bcryptpromise = require('../utils/bcryptpromise')
 const uid = require('../utils/uid')
 
-let posts = ngdb.child('posts')
+let posts = esndb.child('posts')
 
 const numbers = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"]
 

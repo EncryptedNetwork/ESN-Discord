@@ -11,7 +11,7 @@ router.use((req, res, next) => {
         let token = req.cookies.token
         db.getToken(token).then((tokenEntry) => {
             if(tokenEntry) {
-                req.userid = tokenEntry.ngid
+                req.userid = tokenEntry.esnid
             }
             next()
             return
@@ -25,7 +25,7 @@ router.use((req, res, next) => {
 router.post('/getUser', (req, res, next) => {
     let userid = req.body.userid
 
-    db.getUserByNGID(userid).then((user) => {
+    db.getUserByESNID(userid).then((user) => {
         if(user) {
             res.send({status: 'success', user: user})
         } else {
@@ -52,7 +52,7 @@ router.post('/login', (req, res,next) => {
     UserService.authenticateUser(email, password).then((data) => {
 
         if(data.status === "success") {
-            data.profile = "/user/" + data.ngid
+            data.profile = "/user/" + data.esnid
             res.cookie("token", data.token)
         }
 
@@ -63,19 +63,19 @@ router.post('/login', (req, res,next) => {
 
 router.use('/logout', (req, res, next) => {
     res.clearCookie('token')
-    res.render('pages/index',  { user: { ngid: req.userid, profile: '/user/' + req.userid }})
+    res.render('pages/index',  { user: { esnid: req.userid, profile: '/user/' + req.userid }})
 })
 
 router.post('/signup', (req, res, next) => {
     if(req.userid) {
-        res.send({status: 'error', message: "You're already logged into an NG Account.", profile: '/user/' + req.userid})
+        res.send({status: 'error', message: "You're already logged into an ESN Account.", profile: '/user/' + req.userid})
     } else {
         let email = req.body.email
         let password = req.body.password
         let username = req.body.username
 
         UserService.createUser(email, password, username).then((result) => {
-            result.profile = "/user/" + result.ngid
+            result.profile = "/user/" + result.esnid
             res.send(result)
         })
     }
@@ -101,7 +101,7 @@ router.get('/auth/discord/callback', (req, res, next) => {
     if (err) return next(err)
 
     console.log('okokok ', profile)
-    res.redirect('https://nativegaming.me/')
+    res.redirect('https://google.com')
 
   })(req, res, next)
 })

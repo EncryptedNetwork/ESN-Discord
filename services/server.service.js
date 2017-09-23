@@ -13,7 +13,7 @@ if(config.CON_DISCORD) {
 }
 
 client.on('ready', () => {
-  config.STATUS_esndb = "online"
+  config.STATUS_DISCORD = "online"
   console.log('Discord Service Online.')
   client.user.setGame(`Dev Build v` + config.version)
 })

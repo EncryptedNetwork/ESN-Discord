@@ -10,7 +10,7 @@ router.use((req, res, next) => {
         let token = req.cookies.token
         db.getToken(token).then((tokenEntry) => {
             if(tokenEntry) {
-                req.userid = tokenEntry.ngid
+                req.userid = tokenEntry.esnid
             }
             next()
             return
@@ -22,10 +22,10 @@ router.use((req, res, next) => {
 })
 
 router.post('/discord', (req, res, next) => {
-    let ngid = req.userid
+    let esnid = req.userid
     let authDiscordID = req.body.discordid
 
-    UserService.generateDiscordAuthCode(ngid, authDiscordID).then((response) => {
+    UserService.generateDiscordAuthCode(esnid, authDiscordID).then((response) => {
         if(response.code === '200 C') {
             res.send({ status: 'success', authCode: response.discordAuthCode, message: 'Auth Code generated, please verify.' })
         }

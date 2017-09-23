@@ -1,6 +1,6 @@
 const utils = require('./chatcensor');
 
-module.exports = (ngdb, params) => {
+module.exports = (esndb, params) => {
 	const {author, args, channel, client, member, message} = params;
 
 	if (message.author.bot) return;

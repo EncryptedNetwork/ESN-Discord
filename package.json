@@ -1,7 +1,7 @@
 {
-  "name": "NGDB",
+  "name": "ESNDB",
   "version": "0.1.8",
-  "description": "Native Gaming Discord Bot",
+  "description": "Encrypted Network Discord Bot",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
@@ -31,7 +31,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/heroku/ngdb.git"
+    "url": "https://github.com/heroku/esn-db.git"
   },
   "license": "MIT"
 }

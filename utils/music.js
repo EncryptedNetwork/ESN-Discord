@@ -9,7 +9,7 @@ const tokens = {
   "passes" : 1 //can be increased to reduce packetloss at the expense of upload bandwidth, 4-5 should be lossless at the expense of 4-5x upload
 }
 
-module.exports = (nrdb, params) => {
+module.exports = (esndb, params) => {
 	const {author, args, channel, client, member, message: msg} = params;
 	const {username, id} = author;
 

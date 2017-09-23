@@ -11,7 +11,7 @@ router.use((req, res, next) => {
         let token = req.cookies.token
         db.getToken(token).then((tokenEntry) => {
             if(tokenEntry) {
-                req.userid = tokenEntry.ngid
+                req.userid = tokenEntry.esnid
             }
             next()
             return
@@ -30,7 +30,7 @@ router.post('/newTicket', (req, res, next) => {
     } else {
         let key = uid.generateAppUID()
         let date = new Date()
-        UserService.getUserByNGID(req.userid).then((user) => {
+        UserService.getUserByESNID(req.userid).then((user) => {
             let ticket = {
                 name: name,
                 email: user.email,
@@ -40,7 +40,7 @@ router.post('/newTicket', (req, res, next) => {
                 other: other,
                 date: date,
                 state: state,
-                ngid: req.userid
+                esnid: req.userid
             }
 
             supportService.newTicket(key, ticket)
