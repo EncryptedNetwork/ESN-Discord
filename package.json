@@ -7,6 +7,9 @@
     "start": "node index.js",
     "build-apply": "browserify public/js/pages/Uapply.js -o public/js/pages/apply.js"
   },
+  "engines": {
+    "node": "8.5.0"
+  },
   "author": "Null Reality",
   "dependencies": {
     "bcrypt": "^1.0.2",
