@@ -1,7 +1,7 @@
 module.exports = {
   'help': {
     handler: require(`../cmds/help`),
-    description: `Help command. Dumbass. Type \`\`~help support\`\` for a more detailed explanation.`,
+    description: `Help command. Type \`\`~help support\`\` for a more detailed explanation.`,
     blockBot: true,
     permLevel: 20
   },
@@ -13,7 +13,7 @@ module.exports = {
   },
   'signup': {
     handler: require(`../cmds/signup`),
-    description: `Creates your account in the Native Gaming Network. `,
+    description: `Creates your account in the Encrypted Network. `,
     blockBot: true,
     permLevel: 20
   },
@@ -72,8 +72,7 @@ RANKS:
  - OWNER: 1
  - DEVELOPER: 1
  - JRDEV: 5
- - SADMIN: 6
- - ADMIN: 8
+ - ADMIN: 6
  - TMOD: 10
  - VERIFIED-USER: 19 (NOT IMPLEMENTED)
  - USER: 20
