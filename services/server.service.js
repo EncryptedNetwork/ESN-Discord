@@ -80,7 +80,7 @@ client.on('message', message => {
 
 // DB User Management
 client.on('guildMemberAdd', (member) => {
-  db.getUserByDiscordID(member.id).then((user) => {
+  UserService.getUserByDiscordID(member.id).then((user) => {
     if (!user) {
       db.newDiscordUser(member.id, member.user.username)
       return
