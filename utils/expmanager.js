@@ -43,20 +43,29 @@ module.exports = (esndb, params) => {
 
 				//DEDICATOR
 				if(user.level >= 5 && !user.achievements.includes("__Regularity__")) {
-						users.child(userId).update({
+					users.child(userId).update({
 						credits: user.credits +500,
 						achievements: user.achievements + ", __Regularity__"
 					});
 					channel.sendEmbed({ color: 3066993, title: username + " unlocked the '__Regularity__' achievement!", description: "+§500 Credits!"});
 				}
 
+				//5 WONDERS
+				if(user.totalexp >= 5000 && !user.achievements.includes("__5 Wonders__")) {
+					users.child(userId).update({
+						credits: user.credits +1500,
+						achievements: user.achievements + ", __5 Wonders__"
+					});
+					channel.sendEmbed({ color: 3066993, title: username + " unlocked the '__5 Wonders__' achievement!", description: "+§1500 Credits!"});
+				}
+
 				//THE K
-				if(user.totalexp >= 1000 && !user.achievements.includes("__The K__")) {
+				if(user.totalexp >= 1000 && !user.achievements.includes("__K__")) {
 					users.child(userId).update({
 						credits: user.credits +700,
-						achievements: user.achievements + ", __The K__"
+						achievements: user.achievements + ", __K__"
 					});
-					channel.sendEmbed({ color: 3066993, title: username + " unlocked the '__The K__' achievement!", description: "+§700 Credits!"});
+					channel.sendEmbed({ color: 3066993, title: username + " unlocked the '__K__' achievement!", description: "+§700 Credits!"});
 				}
 
 				//X
@@ -69,24 +78,42 @@ module.exports = (esndb, params) => {
 				}	
 
 				//SYDNEY
-				if(user.totalexp >= 10000 && !user.achievements.includes("__Sydney__")) {
-						users.child(userId).update({
-						exp: user.exp +1000,
-						totalexp: user.totalexp +1000,
-						achievements: user.achievements + ", __Sydney__"
+				if(user.totalexp >= 10000 && !user.achievements.includes("__Strike__")) {
+					users.child(userId).update({
+						credits: user.credits +3000,
+						achievements: user.achievements + ", __Strike__"
 					});
-					channel.sendEmbed({ color: 3066993, title: username + " unlocked the '__Sydney__' achievement!", description: "+1000 EXP!"});
+					channel.sendEmbed({ color: 3066993, title: username + " unlocked the '__Strike__' achievement!", description: "+§3000 Credits!"});
 				}		
 
 				//MILLIONAIRE
 				if(user.credits >= 1000000 && !user.achievements.includes("__Millionaire__")) {
-						users.child(userId).update({
-						exp: user.exp +1000,
-						totalexp: user.totalexp +1000,
+					users.child(userId).update({
+						exp: user.exp +2000,
+						totalexp: user.totalexp +2000,
+						credits: user.credits +50000,
 						achievements: user.achievements + ", __Millionaire__"
 					});
-					channel.sendEmbed({ color: 3066993, title: username + " unlocked the '__Millionaire__' achievement!", description: "+2000 EXP! \n +§50000 Credits!"});
-                }
+					channel.sendEmbed({ color: 3066993, title: username + " unlocked the '__Millionaire__' achievement!", description: "+2000 EXP! \n+§50000 Credits!"});
+				}
+				
+				//Andrew Jackson
+				if(user.level >= 20 && !user.achievements.includes("__Andrew Jackson__")) {
+					users.child(userId).update({
+						credits: user.credits +10000,
+						achievements: user.achievements + ", __Andrew Jackson__"
+					});
+					channel.sendEmbed({ color: 3066993, title: username + " unlocked the '__Andrew Jackson__' achievement!", description: "+§10000 Credits!"});
+				}
+
+				//Andrew Jackson
+				if(user.level >= 30 && !user.achievements.includes("__White Albulm__")) {
+					users.child(userId).update({
+						credits: user.credits +20000,
+						achievements: user.achievements + ", __White Albulm__"
+					});
+					channel.sendEmbed({ color: 3066993, title: username + " unlocked the '__White Albulm__' achievement!", description: "+§20000 Credits!"});
+				}
 
 
                 // LEVEL RANKS

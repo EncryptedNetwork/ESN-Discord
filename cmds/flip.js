@@ -14,7 +14,8 @@ module.exports = (esndb, params) => {
         id: userId
       } = author
 
-      channel.send(username + " flipped " + coinFlip() + "! :white_circle: :red_circle: :black_circle:")
+      channel.send(username + " flipped **" + coinFlip() + "**!")
+      //:white_circle: :red_circle: :black_circle:
 
 }
 

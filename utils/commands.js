@@ -3,15 +3,15 @@ module.exports = {
     handler: require(`../cmds/help`),
     description: `Help command. Type \`\`~help support\`\` for a more detailed explanation.`,
     blockBot: true,
-    permLevel: 20,
-    disabled: true
+    permLevel: 10,
+    disabled: false
   },
   'profile': {
     handler: require(`../cmds/profile`),
     description: `Shows your profile or the profile of another if so-asked.`,
     blockBot: true,
     permLevel: 20,
-    disabled: true
+    disabled: false
   },
   'flip': {
     handler: require(`../cmds/flip`),
@@ -72,6 +72,13 @@ module.exports = {
   'announce': {
     handler: require(`../cmds/announce`),
     description: 'The announce command. Used to control the announcements in a professional manner.',
+    blockBot: true,
+    permLevel: 3,
+    disabled: false
+  },
+  'faq': {
+    handler: require(`../cmds/faq`),
+    description: 'The announce command. Used to control the FAQ in a professional manner.',
     blockBot: true,
     permLevel: 3,
     disabled: false
