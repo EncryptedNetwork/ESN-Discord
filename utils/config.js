@@ -1,7 +1,7 @@
 module.exports = {
   
   // BASE
-    version: `1.0.0`, // BOT VERSION
+    version: `1.0.1`, // BOT VERSION
     prefix: `!`, // GLOBAL COMMAND PREFIX
     devPrefix: `$`, // GLOBAL DEV COMMAND PREFIX
   
@@ -11,15 +11,19 @@ module.exports = {
     CON_DB: true,
   
   // STATUS
-    STATUS_DB: "offline",
-    STATUS_STEAM: "offline",
-    STATUS_DISCORD: "offline",
+    STATUS_DB: `offline`,
+    STATUS_STEAM: `offline`,
+    STATUS_DISCORD: `offline`,
   
   // COLORS
     COLOR_ERROR: 15158332, // GLOBAL ERROR COLOR
     COLOR_CRITICAL: 10038562, // GLOBAL CRITICAL COLOR
     COLOR_WARNING: 15844367, // GLOBAL WARNING COLOR
     COLOR_SUCCESS: 3066993, // GLOBAL SUCCESS COLOR
+
+    ANNOUNCE_UPDATES: 0x007c00,
+    ANNOUNCE_ERROR: 0x8e0000,
+    ANNOUNCE_SCHEDULED: 0x47008e,
 
   // SETTINGS
 
@@ -35,4 +39,3 @@ module.exports = {
       LOG_MODERATIONS: false
   
 }
-  

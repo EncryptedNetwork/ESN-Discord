@@ -36,6 +36,7 @@ client.on('message', message => {
   const params = {author, channel, args, client, member, message}
 
   require('../utils/music')(esndb, params)
+  require('../utils/expmanager')(esndb, params)
 
   if(!command) {
     return
@@ -46,7 +47,15 @@ client.on('message', message => {
   UserService.getUserByDiscordID(author.id).then((user) => {
     if (!user) {
       if (command.permLevel <= 20) {
-        command.handler(esndb, params)
+        if(!command.disabled) {
+          command.handler(esndb, params)
+        } else {
+          channel.sendEmbed({
+            color: config.COLOR_ERROR,
+            title: `Command Disabled`,
+            description: `This command is currently disabled until further notice.`
+          })
+        }
         return
       } else {
         channel.sendEmbed({
@@ -64,7 +73,15 @@ client.on('message', message => {
       let rank = rankSnapshot.val()
 
       if (command.permLevel >= rank.power) {
-        command.handler(esndb, params)
+        if(!command.disabled) {
+          command.handler(esndb, params)
+        } else {
+          channel.sendEmbed({
+            color: config.COLOR_ERROR,
+            title: `Command Disabled`,
+            description: `This command is currently disabled until further notice.`
+          })
+        }
         return
       } else {
         channel.send({ embed: {

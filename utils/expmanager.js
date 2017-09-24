@@ -1,0 +1,182 @@
+const config = require('../utils/config')
+const config = require('../services/user.service')
+
+const DEFAULT_EXP_BONUS = 2
+
+const DOUBLE_EXP_BONUS = DEFAULT_EXP_BONUS * 2
+const TRIPLE_EXP_BONUS = DEFAULT_EXP_BONUS * 3
+
+const DEFAULT_TALK_EXP_BONUS = DEFAULT_EXP_BONUS * 2
+
+const DOUBLE_TALK_EXP_BONUS = DEFAULT_TALK_EXP_BONUS * 2
+const TRIPLE_TALK_EXP_BONUS = DEFAULT_TALK_EXP_BONUS * 3
+
+module.exports = (esndb, params) => {
+	const {author, args, channel, client, member, message} = params
+    const {username, id} = author
+
+    const users = esndb.child('users')
+
+	if (author.bot) return
+
+    UserService.getUserByDiscordID(id).then((user) => {
+		users.child(user.esnid).once('value').then((userSnapshot) => {
+			var user = userSnapshot.val()
+			var messagedInServer
+			// if(message.server.id == "255210956668272684") {console.log("yes.")}else{console.log("no.")}
+			if(user) {
+
+		  		addExp(DEFAULT_EXP_BONUS, user.esnid, member, userSnapshot)
+		  		checkBoostExpire(user.esnid, userSnapshot)
+
+			//ACHIEVEMENTS
+				//FIRST TIMER
+				if(user.level >= 1 && !user.achievements.includes("__First Timer__")) {
+						users.child(user.esnid).update({
+						exp: user.exp +10,
+						totalexp: user.totalexp +10,
+						achievements: "__First Timer__"
+					})
+					channel.sendEmbed({ color: 3066993, title: username + " unlocked the 'First Timer' achievement!", description: "+10 EXP!"})
+				}
+
+				//DEDICATOR
+				if(user.level >= 5 && !user.achievements.includes("__Dedicator__")) {
+						users.child(user.esnid).update({
+						exp: user.exp +40,
+						totalexp: user.totalexp +40,
+						achievements: user.achievements + ", __Dedicator__"
+					})
+					channel.sendEmbed({ color: 3066993, title: username + " unlocked the 'Dedicator' achievement!", description: "+40 EXP!"})
+				}
+
+				//THE K
+				if(user.totalexp >= 1000 && !user.achievements.includes("__The K__")) {
+						users.child(user.esnid).update({
+						exp: user.exp +150,
+						totalexp: user.totalexp +150,
+						achievements: user.achievements + ", __The K__"
+					})
+					channel.sendEmbed({ color: 3066993, title: username + " unlocked the 'The K' achievement!", description: "+150 EXP!"})
+				}
+
+				//X
+				if(user.level >= 10 && !user.achievements.includes("__X__")) {
+						users.child(user.esnid).update({
+						exp: user.exp +600,
+						totalexp: user.totalexp +600,
+						achievements: user.achievements + ", __X__"
+					})
+					channel.sendEmbed({ color: 3066993, title: username + " unlocked the 'X' achievement!", description: "+600 EXP!"})
+				}	
+
+				if(user.totalexp >= 1000000 && !user.achievements.includes("__Sydney__")) {
+						users.child(user.esnid).update({
+						exp: user.exp +1000,
+						totalexp: user.totalexp +1000,
+						achievements: user.achievements + ", __Sydney__"
+					})
+					channel.sendEmbed({ color: 3066993, title: username + " unlocked the 'Sydney' achievement!", description: "+1000 EXP!"})
+				}		
+
+				if(user.credits >= 1000000 && !user.achievements.includes("__Millionaire__")) {
+						users.child(user.esnid).update({
+						exp: user.exp +1000,
+						totalexp: user.totalexp +1000,
+						achievements: user.achievements + ", __Millionaire__"
+					})
+					channel.sendEmbed({ color: 3066993, title: username + " unlocked the 'Millionaire' achievement!", description: "+2000 EXP! \n +§50000 Credits!"})
+				}
+	    
+	    		checkIfLevelUp(user.esnid, userSnapshot, channel)
+				}	
+			})
+}
+
+function addExp(exp, user.esnid, member, userSnapshot) {
+	var user = userSnapshot.val()
+
+	if(user.doubleexp) {
+		userSnapshot.ref.update({
+			totalexp: user.totalexp + DOUBLE_EXP_BONUS,
+			exp: user.exp + DOUBLE_EXP_BONUS
+		})
+	}
+	if(user.tripleexp) {
+		userSnapshot.ref.update({
+			totalexp: user.totalexp + TRIPLE_EXP_BONUS,
+			exp: user.exp + TRIPLE_EXP_BONUS
+		})
+	}
+	if(!member.voiceChannel != null) {
+		if(user.doubleexp) {
+			userSnapshot.ref.update({
+				totalexp: user.totalexp + DOUBLE_TALK_EXP_BONUS,
+				exp: user.exp + DOUBLE_TALK_EXP_BONUS
+			})
+		} else if(user.tripleexp) {
+			userSnapshot.ref.update({
+				totalexp: user.totalexp + TRIPLE_TALK_EXP_BONUS,
+				exp: user.exp + TRIPLE_TALK_EXP_BONUS
+			})
+		} else {
+			userSnapshot.ref.update({
+				totalexp: user.totalexp + DOUBLE_EXP_BONUS,
+				exp: user.exp + DOUBLE_EXP_BONUS
+			})
+		}
+		
+	} else {
+		userSnapshot.ref.update({
+			totalexp: user.totalexp + exp,
+			exp: user.exp + exp
+		})
+	}
+}
+
+function checkIfLevelUp(user.esnid, userSnapshot, channel) {
+	var user = userSnapshot.val()
+
+	if(user.exp >= user.expup) {
+		levelUp(user.esnid, userSnapshot, channel)
+	}
+}
+
+function levelUp(user.esnid, userSnapshot, channel) {
+	var user = userSnapshot.val()
+
+	userSnapshot.ref.update({
+		exp: user.exp - user.expup + 10,
+		totalexp: user.totalexp + 10,
+		expup: user.expup + 100,
+		level: user.level + 1
+	})
+	channel.sendEmbed({ color: 3066993, title: user.username + " just reached level " + (user.level + 1) + "!", description: "+10 EXP!"})
+}
+
+function checkBoostExpire(user.esnid, userSnapshot) {
+	var user = userSnapshot.val()
+
+	var dateNow = new Date()
+
+	//DOUBLE EXPIRE TIME
+	if(user.tripleexptime) {
+		var expireDate = new Date(user.tripleexptime)
+		if(expireDate.getTime() < dateNow.getTime()) {
+			userSnapshot.ref.update({
+				tripleexptime: null,
+				tripleexp: false
+			})
+		}
+	}
+
+	if(user.tripleexptime) {
+		var expireDate = new Date(user.tripleexptime)
+		if(expireDate.getTime() < dateNow.getTime()) {
+			userSnapshot.ref.update({
+				tripleexptime: null,
+				tripleexp: false
+			})
+		}
+	}
+}
