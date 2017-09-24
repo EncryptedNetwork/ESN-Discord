@@ -68,6 +68,13 @@ module.exports = {
     blockBot: true,
     permLevel: 5,
     disabled: false
+  },
+  'announce': {
+    handler: require(`../cmds/announce`),
+    description: 'The announce command. Used to control the announcements in a professional manner.',
+    blockBot: true,
+    permLevel: 3,
+    disabled: false
   }
 }
 

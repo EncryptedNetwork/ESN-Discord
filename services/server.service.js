@@ -53,7 +53,7 @@ client.on('message', message => {
         if(!command.disabled) {
           command.handler(esndb, params)
         } else {
-          channel.sendEmbed({
+          author.sendEmbed({
             color: config.COLOR_ERROR,
             title: `Command Disabled`,
             description: `This command is currently disabled until further notice.`
@@ -61,7 +61,7 @@ client.on('message', message => {
         }
         return
       } else {
-        channel.sendEmbed({
+        author.sendEmbed({
           color: config.COLOR_ERROR,
           title: `Permission Error`,
           description: `You do not have permission to issue this command.`
@@ -81,7 +81,7 @@ client.on('message', message => {
         } else if(command.disabled && rank.power === 1){
           command.handler(esndb, params)
         } else {
-          channel.sendEmbed({
+          author.sendEmbed({
             color: config.COLOR_ERROR,
             title: `Command Disabled`,
             description: `This command is currently disabled until further notice.`
@@ -89,7 +89,7 @@ client.on('message', message => {
         }
         return
       } else {
-        channel.send({ embed: {
+        author.send({ embed: {
           color: config.COLOR_ERROR,
           title: `Permission Error`,
           description: `You do not have permission to issue this command.`

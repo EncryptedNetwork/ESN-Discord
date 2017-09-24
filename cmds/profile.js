@@ -11,9 +11,18 @@ module.exports = (esndb, params) => {
     
 
     if(!userProfileID) {
-   
-        const userDataRequest = UserService.getUserByDiscordID(author.id)
-        userDataRequest.then(sendUserDataToDiscord)
+
+        var targetusername
+        var targetavatarURL
+
+        UserService.getUserByDiscordID(author.id).then((user) => {
+            client.fetchUser(author.id).then(u => {
+                targetavatarURL = u.avatarURL
+                targetusername = u.username
+
+                sendUserDataToDiscord(user, targetusername, targetavatarURL)
+            })
+        })
 
     } else {
 
@@ -22,24 +31,24 @@ module.exports = (esndb, params) => {
         var targetusername
         var targetavatarURL
 
-        client.fetchUser(userProfileIDTrim).then(u=>{
-             targetusername = u.username
-             targetavatarURL = u.avatarURL
+        UserService.getUserByDiscordID(userProfileIDTrim).then((user) => {
+            client.fetchUser(userProfileIDTrim).then(u => {
+                targetavatarURL = u.avatarURL
+                targetusername = u.username
 
-             const userDataRequest = UserService.getUserByDiscordID(userProfileIDTrim)
-             userDataRequest.then(sendUserDataToDiscord)
-      })
-    
+                sendUserDataToDiscord(user, targetusername, targetavatarURL)
+            })
+        })
     }
     
-    function sendUserDataToDiscord(user) {
+    function sendUserDataToDiscord(user, targetusername, targetavatarURL) {
         if(user) {
-
+            
             channel.send({ embed: {
-                color: parseInt(user.profilebarcolor),
+                color: barColor(user.level),
                 author: {
-                  name: author.username,
-                  icon_url: author.avatarURL
+                  name: targetusername,
+                  icon_url: targetavatarURL
                 },
                 fields: [{
                     name: 'Rank',
@@ -62,8 +71,8 @@ module.exports = (esndb, params) => {
                     inline: true
                 },
                 {
-                    name: 'Last Seen On',
-                    value: "ESN Rust Server",
+                    name: 'Achievements',
+                    value: user.achievements,
                     inline: true
                 }
                 ],
@@ -89,4 +98,49 @@ function trim(s, mask) {
         s = s.slice(0, -1);
     }
     return s;
+}
+
+function barColor(level) {
+    if(between(level, 0, 9)) {
+        return 0xA3A3A3
+    }
+    if(between(level, 10, 19)) {
+        return 0xD4314F
+    }
+    if(between(level, 20, 29)) {
+        return 0xED941F
+    }
+    if(between(level, 30, 39)) {
+        return 0xDDE635
+    }
+    if(between(level, 40, 49)) {
+        return 0x25AB0E
+    }
+    if(between(level, 50, 59)) {
+        return 0x25BAB2
+    }
+    if(between(level, 60, 69)) {
+        return 0x9E0DE0
+    }
+    if(between(level, 70, 79)) {
+        return 0xE868D1
+    }
+    if(between(level, 80, 89)) {
+        return 0x660033
+    }
+    if(between(level, 90, 99)) {
+        return 0xD6B46B
+    }
+    if(between(level, 100, 109)) {
+        return 0x7D5807
+    }
+    if(between(level, 110, 119)) {
+        return 0x000000
+    }
+
+
+}
+
+function between(x, min, max) {
+    return x >= min && x <= max;
 }

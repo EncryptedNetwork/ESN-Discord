@@ -1,7 +1,7 @@
 module.exports = {
   
   // BASE
-    version: `1.0.2`, // BOT VERSION
+    version: `1.1.3`, // BOT VERSION
     prefix: `!`, // GLOBAL COMMAND PREFIX
     devPrefix: `$`, // GLOBAL DEV COMMAND PREFIX
   
@@ -21,9 +21,10 @@ module.exports = {
     COLOR_WARNING: 15844367, // GLOBAL WARNING COLOR
     COLOR_SUCCESS: 3066993, // GLOBAL SUCCESS COLOR
 
-    ANNOUNCE_UPDATES: 0x007c00,
+    ANNOUNCE_UPDATES: 3066993,
     ANNOUNCE_ERROR: 0x8e0000,
     ANNOUNCE_SCHEDULED: 0x47008e,
+    ANNOUNCE_ALERTS: 0xcece00,
 
   // SETTINGS
 
