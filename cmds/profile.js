@@ -73,7 +73,7 @@ module.exports = (esndb, params) => {
                 {
                     name: 'Achievements',
                     value: user.achievements,
-                    inline: true
+                    inline: false
                 }
                 ],
                 timestamp: new Date(),
