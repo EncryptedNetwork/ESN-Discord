@@ -1,10 +1,10 @@
 const config = require('../utils/config');
 const UserService = require('../services/user.service')
 
-const DEFAULT_EXP_BONUS = 2;
+const DEFAULT_EXP_BONUS = 5
 
-const DOUBLE_EXP_BONUS = DEFAULT_EXP_BONUS * 2;
-const TRIPLE_EXP_BONUS = DEFAULT_EXP_BONUS * 3;
+const DOUBLE_EXP_BONUS = DEFAULT_EXP_BONUS + 2;
+const TRIPLE_EXP_BONUS = DEFAULT_EXP_BONUS + 3;
 
 const DEFAULT_TALK_EXP_BONUS = DEFAULT_EXP_BONUS * 2;
 
@@ -90,7 +90,7 @@ module.exports = (esndb, params) => {
 					channel.sendEmbed({ color: 3066993, title: username + " unlocked the 'Millionaire' achievement!", description: "+2000 EXP! \n +§50000 Credits!"});
 				}
 	    
-	    		checkIfLevelUp(userId, userSnapshot, channel);
+	    		checkIfLevelUp(userId, userSnapshot, channel, author);
 				}	
             });
         })
@@ -145,16 +145,22 @@ function checkIfLevelUp(userId, userSnapshot, channel) {
 	}
 }
 
-function levelUp(userId, userSnapshot, channel) {
-	var user = userSnapshot.val();
+function levelUp(userId, userSnapshot, channel, author) {
+	var user = userSnapshot.val()
 
 	userSnapshot.ref.update({
-		exp: user.exp - user.expup + 10,
-		totalexp: user.totalexp + 10,
+		exp: user.exp - user.expup,
+		totalexp: user.totalexp,
 		expup: user.expup + 100,
 		level: user.level + 1
-	});
-	channel.sendEmbed({ color: 3066993, title: user.username + " just reached level " + (user.level + 1) + "!", description: "+10 EXP!"});
+    })
+
+    author.sendEmbed({ color: config.COLOR_SUCCESS, title: "You just reached level " + (user.level + 1), description: "Congratulations! Keep it up!" })
+    
+    if(isInteger(user.level / 5)) {
+        genchan = client.channels.get("359883901990207499")
+        channel.sendEmbed({ color: 3066993, title: user.username + " just reached level " + (user.level + 1) + "!", description: "Congratulations!"})
+    }
 }
 
 function checkBoostExpire(userId, userSnapshot) {
@@ -182,4 +188,12 @@ function checkBoostExpire(userId, userSnapshot) {
 			});
 		}
 	}
+}
+
+function isFloat(n) {
+    return n === +n && n !== (n|0)
+}
+
+function isInteger(n) {
+    return n === +n && n === (n|0)
 }
