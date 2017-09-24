@@ -38,7 +38,7 @@ module.exports = (esndb, params) => {
 						credits: user.credits +100,
 						achievements: "__First Timer__"
 					});
-					channel.sendEmbed({ color: 3066993, title: username + " unlocked the '__First Timer__' achievement!", description: "+10 EXP \n +§100 Credits!"});
+					channel.sendEmbed({ color: 3066993, title: username + " unlocked the '__First Timer__' achievement!", description: "+§100 Credits!"});
 				}
 
 				//DEDICATOR
@@ -107,12 +107,12 @@ module.exports = (esndb, params) => {
 				}
 
 				//Andrew Jackson
-				if(user.level >= 30 && !user.achievements.includes("__White Albulm__")) {
+				if(user.level >= 30 && !user.achievements.includes("__White Album__")) {
 					users.child(userId).update({
 						credits: user.credits +20000,
-						achievements: user.achievements + ", __White Albulm__"
+						achievements: user.achievements + ", __White Album__"
 					});
-					channel.sendEmbed({ color: 3066993, title: username + " unlocked the '__White Albulm__' achievement!", description: "+§20000 Credits!"});
+					channel.sendEmbed({ color: 3066993, title: username + " unlocked the '__White Album__' achievement!", description: "+§20000 Credits!"});
 				}
 
 
