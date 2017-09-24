@@ -103,7 +103,6 @@ function previewFAQ(name, channel) {
     FAQs[name].setTimestamp()
     FAQs[name].setFooter("© Encrypted Network")
     channel.send({embed: FAQs[name]})
-    console.log(FAQs[name])
 }
 
 function sendFAQ(name, channel) {

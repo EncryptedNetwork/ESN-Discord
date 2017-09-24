@@ -33,7 +33,7 @@ module.exports = (esndb, params) => {
                 channel.send({ embed: { color: utils.COLOR_ERROR, title: `Error locating announcement`, description: `Please enter an announcement name. Create an announcement using \`\`${config.prefix}announce new <announcement name> <type>\`\`!`}})
               }
           } else {
-            channel.send({ embed: { color: utils.COLOR_ERROR, title: `Type Not Recognized`, description: `The announcement type '${two}' does not exist. Please create an announcement using \`\`${config.prefix}announce new <type: up / er / sc> <announcement name>\`\`!`}})
+            channel.send({ embed: { color: utils.COLOR_ERROR, title: `Type Not Recognized`, description: `The announcement type '${two}' does not exist. Please create an announcement using \`\`${config.prefix}announce new <type: up / er / sc / al> <announcement name>\`\`!`}})
           }
       } else if(init === "title" || init === "t") {
           if(announcements[two]) {
@@ -103,7 +103,6 @@ function previewAnnouncement(name, channel) {
     announcements[name].setTimestamp()
     announcements[name].setFooter("© Encrypted Network")
     channel.send({embed: announcements[name]})
-    console.log(announcements[name])
 }
 
 function sendAnnouncement(name, channel) {
