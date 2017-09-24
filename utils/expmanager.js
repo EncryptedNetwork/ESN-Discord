@@ -13,7 +13,7 @@ const TRIPLE_TALK_EXP_BONUS = DEFAULT_TALK_EXP_BONUS * 3;
 
 module.exports = (esndb, params) => {
 	const {author, args, channel, client, member, message} = params;
-	const {username, id: userId} = author;
+	let {username, id: userId} = author;
 
 	const users = esndb.child('users');
 
