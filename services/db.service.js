@@ -47,6 +47,7 @@ exports.newDiscordUser = function(discordid, username) {
   user.expup = 100
   user.totalexp = 0
   user.rank = "user"
+  user.achievements = "**None yet**"
 
   users.child(esnid).update(user)
 }

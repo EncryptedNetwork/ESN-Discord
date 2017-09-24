@@ -137,11 +137,11 @@ function addExp(exp, userId, member, userSnapshot) {
 	}
 }
 
-function checkIfLevelUp(userId, userSnapshot, channel) {
+function checkIfLevelUp(userId, userSnapshot, channel, author) {
 	var user = userSnapshot.val();
 
 	if(user.exp >= user.expup) {
-		levelUp(userId, userSnapshot, channel);
+		levelUp(userId, userSnapshot, channel, author);
 	}
 }
 

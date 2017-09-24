@@ -33,11 +33,10 @@ client.on('message', message => {
   const command = commands[commandKey]
   const params = {author, channel, args, client, member, message}
 
-  // REQ FOR ALL MSGS
-  require('../utils/expmanager')(esndb, params)
-
   // DOES THE MESSAGE INCLUDE THE PREFIX?
-  if (!commandKey.includes(config.prefix)) return
+  if (!commandKey.startsWith(config.prefix)) {
+    require('../utils/expmanager')(esndb, params)
+  }
 
   // REQ FOR MSGS W/ PREFIX
   require('../utils/music')(esndb, params)
