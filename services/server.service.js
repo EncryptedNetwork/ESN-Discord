@@ -76,6 +76,8 @@ client.on('message', message => {
       if (command.permLevel >= rank.power) {
         if(!command.disabled) {
           command.handler(esndb, params)
+        } else if(command.disabled && rank.power === 1){
+          command.handler(esndb, params)
         } else {
           channel.sendEmbed({
             color: config.COLOR_ERROR,
