@@ -15,7 +15,7 @@ if(config.CON_DISCORD) {
 client.on('ready', () => {
   config.STATUS_DISCORD = "online"
   console.log('Discord Service Online.')
-  client.user.setGame(`Dev Build v` + config.version)
+  client.user.setGame(`v` + config.version)
 })
 
 // FIREBASE THINGS

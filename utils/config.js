@@ -1,7 +1,7 @@
 module.exports = {
   
   // BASE
-    version: `1.1.3`, // BOT VERSION
+    version: `1.1.4`, // BOT VERSION
     prefix: `!`, // GLOBAL COMMAND PREFIX
     devPrefix: `$`, // GLOBAL DEV COMMAND PREFIX
   
