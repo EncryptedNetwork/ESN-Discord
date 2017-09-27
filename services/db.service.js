@@ -1,6 +1,5 @@
 const config = require('../utils/config')
 const uid = require('../utils/uid')
-const config = require('../utils/config')
 
 let firebase = require('firebase')
 
