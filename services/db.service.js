@@ -32,7 +32,7 @@ exports.newApp = function(appId, application) {
   applications.child(appId).update(application)
 }
 
-exports.newDiscordUser = function(discordid, username) {
+exports.newDiscordUser = function(discordid, username, member) {
   let date = new Date()
   let esnid = uid.generateUID()
   
@@ -50,6 +50,33 @@ exports.newDiscordUser = function(discordid, username) {
   user.achievements = "**None yet**"
 
   users.child(esnid).update(user)
+
+  member.send({ embed: { 
+    color: utils.COLOR_SUCCESS, 
+    title: `Welcome to the Encrypted Server Network, ${member.nickname}!`, 
+    description: `We're humbled to have you join our Discord Server, and hopefully you've already been in our Rust Server as well! \n\n
+    Our Network doesn't just stop with Rust. In our eyes, gaming never comes to an end; so what does that mean for you? 
+    Well, we've rehauled what Discord and all forms of communication can offer and innovated every way to be a part of ESN.`,
+    fields: [
+      {
+        name: `__Leveling/EXP__`,
+        value: `Now you may be all like "BUT THIS ISN'T NEW, I'VE BEEN SURROUNDED BY EXP/LEVELING SYSTEMS ALL MY LIFE!" Now you are correct, however, you've never been surrounded by ours. 
+        ESN has developed the most innovative and collaborative Leveling/EXP system yet! Ever wanted to be able to get huge prizes, ranks, an abundance of credits that synced across an entire network, across multiple game platforms? 
+        Guess what. You can! "How do I get EXP?" One might ask. 
+        Well, simply enough - be active! Talk to other ESN members, converse about what ESN should add next, and overall be a role model for other ESN members!`
+      },
+      {
+        name: `__Rust__`,
+        value: `Our Rust server is planned for launch this Friday! More details will be provided as the date comes closer. 
+        We truly hope with all our hearts combined into one super heart that  you'll be there!`
+      },
+      {
+        name: `__FAQ__`,
+        value: `We understand joining new commnunities can be confusing at first, and there's often quite a big learning curve for how things work. So that's why we have a #faq channel in the ESN Discord for you to feast your eyes upon for any quesitons you may have. 
+        And if that's not enough, DM either one of the staff members online and we'll attend to your peace-of-mind ASAP!`
+      }],
+      footer: "© Encrypted Network"
+  }})
 }
 
 exports.userExists = function(userid) {

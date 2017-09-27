@@ -15,7 +15,7 @@ if(config.CON_DISCORD) {
 client.on('ready', () => {
   config.STATUS_DISCORD = "online"
   console.log('Discord Service Online.')
-  client.user.setGame(`v` + config.version)
+  client.user.setPresence({ game: { name: `v` + config.version, type: 0 } })
 })
 
 // FIREBASE THINGS
@@ -104,7 +104,7 @@ client.on('message', message => {
 client.on('guildMemberAdd', (member) => {
   UserService.getUserByDiscordID(member.id).then((user) => {
     if (!user) {
-      db.newDiscordUser(member.id, member.user.username)
+      db.newDiscordUser(member.id, member.user.username, member)
       return
     }
 
