@@ -20,7 +20,9 @@ module.exports = (esndb, params) => {
 	if (author.bot) return;
 
     UserService.getUserByDiscordID(userId).then((user) => {
-        userId = user.esnid
+		if(user.esnid) {
+			userId = user.esnid
+		} else return
 
 		users.child(userId).once('value').then((userSnapshot) => {
 			var user = userSnapshot.val();

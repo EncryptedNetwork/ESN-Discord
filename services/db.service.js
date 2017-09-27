@@ -1,5 +1,6 @@
 const config = require('../utils/config')
 const uid = require('../utils/uid')
+const config = require('../utils/config')
 
 let firebase = require('firebase')
 
@@ -52,7 +53,7 @@ exports.newDiscordUser = function(discordid, username, member) {
   users.child(esnid).update(user)
 
   member.send({ embed: { 
-    color: utils.COLOR_SUCCESS, 
+    color: config.COLOR_SUCCESS, 
     title: `Welcome to the Encrypted Server Network, ${member.nickname}!`, 
     description: `We're humbled to have you join our Discord Server, and hopefully you've already been in our Rust Server as well! \n\n
     Our Network doesn't just stop with Rust. In our eyes, gaming never comes to an end; so what does that mean for you? 
@@ -75,7 +76,7 @@ exports.newDiscordUser = function(discordid, username, member) {
         value: `We understand joining new commnunities can be confusing at first, and there's often quite a big learning curve for how things work. So that's why we have a #faq channel in the ESN Discord for you to feast your eyes upon for any quesitons you may have. 
         And if that's not enough, DM either one of the staff members online and we'll attend to your peace-of-mind ASAP!`
       }],
-      footer: "© Encrypted Network"
+      footer: `© Encrypted Network`
   }})
 }
 
