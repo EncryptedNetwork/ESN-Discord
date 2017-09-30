@@ -158,6 +158,25 @@ module.exports = (esndb, params) => {
     }
   }
 
+  if(commandReq === 'remove' || commandReq === "r") {
+    if (!args[1]) {
+      author.send({ embed: {
+        color: config.COLOR_ERROR,
+        title: `Error B101`,
+        description: `Insufficient arguments. Usage: \`\`` + config.prefix + `rank remove\`\` \`\`<rank name (ONE WORD)>\`\``
+      }})
+    } else {
+      let rankName = args[1]
+      ranks.child(rankName).once('value').then(rankSnapshot => {
+        rankData = rankSnapshot.val()
+
+        if(rankData) {
+          ranks.child(rankName).set({})
+        }
+      })
+    }
+  }
+
 // ADD CMD
   if (commandReq === 'add') {
     if (!args[1]) {

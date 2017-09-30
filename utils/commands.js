@@ -66,7 +66,7 @@ module.exports = {
     handler: require(`../cmds/off`),
     description: 'Turns off the Discord Bot, which enables developer mode.',
     blockBot: true,
-    permLevel: 5,
+    permLevel: 3,
     disabled: false
   },
   'announce': {
@@ -78,7 +78,7 @@ module.exports = {
   },
   'faq': {
     handler: require(`../cmds/faq`),
-    description: 'The announce command. Used to control the FAQ in a professional manner.',
+    description: 'The FAQ command. Used to control the FAQ in a professional manner.',
     blockBot: true,
     permLevel: 3,
     disabled: false
@@ -90,7 +90,7 @@ RANKS:
  - OWNER: 1
  - DEVELOPER: 1
  - JRDEV: 5
- - ADMIN: 6
+ - ADMIN: 8
  - MOD: 10
  - REGULAR: 19
  - USER: 20
