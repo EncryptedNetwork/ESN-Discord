@@ -33,7 +33,7 @@ module.exports = {
       MESSAGE_TIMER: 10,
 
     // COMMAND CLEANUP
-      COMMAND_CLEANUP: true,
+      COMMAND_CLEANUP: false,
 
     // DB LOGGING
       LOG_COMMANDS: false,
