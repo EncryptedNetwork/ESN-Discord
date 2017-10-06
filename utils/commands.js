@@ -82,6 +82,13 @@ module.exports = {
     blockBot: true,
     permLevel: 3,
     disabled: false
+  },
+  'staffguide': {
+    handler: require(`../cmds/staffguide`),
+    description: 'The staffguide command. Used to control the staffguide in a professional manner.',
+    blockBot: true,
+    permLevel: 3,
+    disabled: false
   }
 }
 
