@@ -205,7 +205,7 @@ function levelUp(userId, userSnapshot, channel, author, client) {
     
     if(isInteger((user.level + 1) / 5)) {
         genchan = client.channels.get("359883901990207499")
-        genchan.send({ embed: { color: 3066993, title: author.nickname + " just reached level " + (user.level + 1) + "!", description: "Congratulations!"}})
+        genchan.send({ embed: { color: 3066993, title: author.username + " just reached level " + (user.level + 1) + "!", description: "Congratulations!"}})
     }
 }
 
