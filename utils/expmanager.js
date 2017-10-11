@@ -11,15 +11,14 @@ const DEFAULT_TALK_EXP_BONUS = DEFAULT_EXP_BONUS * 2;
 const DOUBLE_TALK_EXP_BONUS = DEFAULT_TALK_EXP_BONUS * 2;
 const TRIPLE_TALK_EXP_BONUS = DEFAULT_TALK_EXP_BONUS * 3;
 
-chatchan = client.channels.get("359883901990207499")
-
 module.exports = (esndb, params) => {
 	const {author, args, channel, client, member, message} = params;
 	let {username, id: userId} = author;
 
-	const users = esndb.child('users');
+	const users = esndb.child('users')
+	chatchan = client.channels.get("359883901990207499")
 
-	if (author.bot) return;
+	if (author.bot) return
 
     UserService.getUserByDiscordID(userId).then((user) => {
 		if(user.esnid) {
