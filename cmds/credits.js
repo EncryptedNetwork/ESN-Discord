@@ -46,7 +46,7 @@ module.exports = (esndb, params) => {
         })
     }
 
-    function updateUserCredits() {
+    function updateUserCredits(user, targetusername, amount) {
         users.child(user.username).update({
             credits: user.credits + amount
         }).then(() => {
