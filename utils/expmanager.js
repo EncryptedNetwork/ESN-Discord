@@ -26,8 +26,8 @@ module.exports = (esndb, params) => {
 		} else return
 
 		users.child(userId).once('value').then((userSnapshot) => {
-			var user = userSnapshot.val();
-			var messagedInServer;
+			var user = userSnapshot.val()
+			var messagedInServer
 			// if(message.server.id == "255210956668272684") {console.log("yes.")}else{console.log("no.")}
 			if(user) {
 
