@@ -89,6 +89,13 @@ module.exports = {
     blockBot: true,
     permLevel: 3,
     disabled: false
+  },
+  'credits': {
+    handler: require(`../cmds/credits`),
+    description: 'Credits manager command.',
+    blockBot: true,
+    permLevel: 3,
+    disabled: false
   }
 }
 

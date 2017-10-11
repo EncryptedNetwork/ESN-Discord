@@ -11,6 +11,8 @@ const DEFAULT_TALK_EXP_BONUS = DEFAULT_EXP_BONUS * 2;
 const DOUBLE_TALK_EXP_BONUS = DEFAULT_TALK_EXP_BONUS * 2;
 const TRIPLE_TALK_EXP_BONUS = DEFAULT_TALK_EXP_BONUS * 3;
 
+chatchan = client.channels.get("359883901990207499")
+
 module.exports = (esndb, params) => {
 	const {author, args, channel, client, member, message} = params;
 	let {username, id: userId} = author;
@@ -40,7 +42,7 @@ module.exports = (esndb, params) => {
 						credits: user.credits +100,
 						achievements: "__First Timer__"
 					});
-					channel.sendEmbed({ color: 3066993, title: username + " unlocked the '__First Timer__' achievement!", description: "+§100 Credits!"});
+					chatchan.sendEmbed({ color: 3066993, title: username + " unlocked the '__First Timer__' achievement!", description: "+§100 Credits!"});
 				}
 
 				//DEDICATOR
@@ -49,7 +51,7 @@ module.exports = (esndb, params) => {
 						credits: user.credits +500,
 						achievements: user.achievements + ", __Regularity__"
 					});
-					channel.sendEmbed({ color: 3066993, title: username + " unlocked the '__Regularity__' achievement!", description: "+§500 Credits!"});
+					chatchan.sendEmbed({ color: 3066993, title: username + " unlocked the '__Regularity__' achievement!", description: "+§500 Credits!"});
 				}
 
 				//5 WONDERS
@@ -58,7 +60,7 @@ module.exports = (esndb, params) => {
 						credits: user.credits +1500,
 						achievements: user.achievements + ", __5 Wonders__"
 					});
-					channel.sendEmbed({ color: 3066993, title: username + " unlocked the '__5 Wonders__' achievement!", description: "+§1500 Credits!"});
+					chatchan.sendEmbed({ color: 3066993, title: username + " unlocked the '__5 Wonders__' achievement!", description: "+§1500 Credits!"});
 				}
 
 				//THE K
@@ -67,7 +69,7 @@ module.exports = (esndb, params) => {
 						credits: user.credits +700,
 						achievements: user.achievements + ", __K__"
 					});
-					channel.sendEmbed({ color: 3066993, title: username + " unlocked the '__K__' achievement!", description: "+§700 Credits!"});
+					chatchan.sendEmbed({ color: 3066993, title: username + " unlocked the '__K__' achievement!", description: "+§700 Credits!"});
 				}
 
 				//X
@@ -76,7 +78,7 @@ module.exports = (esndb, params) => {
 						credits: user.credits +2000,		
 						achievements: user.achievements + ", __X__"
 					});
-					channel.sendEmbed({ color: 3066993, title: username + " unlocked the '__X__' achievement!", description: "+§2000 Credits!"});
+					chatchan.sendEmbed({ color: 3066993, title: username + " unlocked the '__X__' achievement!", description: "+§2000 Credits!"});
 				}	
 
 				//SYDNEY
@@ -85,7 +87,7 @@ module.exports = (esndb, params) => {
 						credits: user.credits +3000,
 						achievements: user.achievements + ", __Strike__"
 					});
-					channel.sendEmbed({ color: 3066993, title: username + " unlocked the '__Strike__' achievement!", description: "+§3000 Credits!"});
+					chatchan.sendEmbed({ color: 3066993, title: username + " unlocked the '__Strike__' achievement!", description: "+§3000 Credits!"});
 				}		
 
 				//MILLIONAIRE
@@ -96,7 +98,7 @@ module.exports = (esndb, params) => {
 						credits: user.credits +50000,
 						achievements: user.achievements + ", __Millionaire__"
 					});
-					channel.sendEmbed({ color: 3066993, title: username + " unlocked the '__Millionaire__' achievement!", description: "+2000 EXP! \n+§50000 Credits!"});
+					chatchan.sendEmbed({ color: 3066993, title: username + " unlocked the '__Millionaire__' achievement!", description: "+2000 EXP! \n+§50000 Credits!"});
 				}
 				
 				//Andrew Jackson
@@ -105,7 +107,7 @@ module.exports = (esndb, params) => {
 						credits: user.credits +10000,
 						achievements: user.achievements + ", __Andrew Jackson__"
 					});
-					channel.sendEmbed({ color: 3066993, title: username + " unlocked the '__Andrew Jackson__' achievement!", description: "+§10000 Credits!"});
+					chatchan.sendEmbed({ color: 3066993, title: username + " unlocked the '__Andrew Jackson__' achievement!", description: "+§10000 Credits!"});
 				}
 
 				//Andrew Jackson
@@ -114,7 +116,7 @@ module.exports = (esndb, params) => {
 						credits: user.credits +20000,
 						achievements: user.achievements + ", __White Album__"
 					});
-					channel.sendEmbed({ color: 3066993, title: username + " unlocked the '__White Album__' achievement!", description: "+§20000 Credits!"});
+					chatchan.sendEmbed({ color: 3066993, title: username + " unlocked the '__White Album__' achievement!", description: "+§20000 Credits!"});
 				}
 
 
