@@ -48,7 +48,7 @@ module.exports = (esndb, params) => {
 
     function updateUserCredits(user, targetusername, amount) {
         users.child(user.esnid).update({
-            credits: user.credits + amount
+            credits: (user.credits + amount)
         }).then(() => {
             channel.send({ embed: {
                 color: config.COLOR_SUCCESS,
