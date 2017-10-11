@@ -22,6 +22,15 @@ module.exports = (esndb, params) => {
 
     } else {
 
+        if(parseInt(amount)) {
+            channel.send({ embed: {
+                color: config.COLOR_ERROR,
+                title: `Error processing request.`,
+                description: `Amount must be a positive or negative integer.`
+            }})
+            return
+        }
+
         const userProfileIDTrim = trim(userProfileID .toString(), "<!@>abcdefghijklmnopqrstuvwxyz")
 
         var targetusername
@@ -41,14 +50,16 @@ module.exports = (esndb, params) => {
                 targetavatarURL = u.avatarURL
                 targetusername = u.username
 
-                updateUserCredits(user, targetusername, amount)
+                var amountToSubject = parseInt(amount)
+
+                updateUserCredits(user, targetusername, amountToSubject)
             })
         })
     }
 
-    function updateUserCredits(user, targetusername, amount) {
+    function updateUserCredits(user, targetusername, amountToSubject) {
         users.child(user.esnid).update({
-            credits: (user.credits + amount)
+            credits: (user.credits + amountToSubject)
         }).then(() => {
             channel.send({ embed: {
                 color: config.COLOR_SUCCESS,
