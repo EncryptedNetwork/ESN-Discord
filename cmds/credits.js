@@ -22,7 +22,7 @@ module.exports = (esndb, params) => {
 
     } else {
 
-        if(parseInt(amount)) {
+        if(!parseInt(amount)) {
             channel.send({ embed: {
                 color: config.COLOR_ERROR,
                 title: `Error processing request.`,
