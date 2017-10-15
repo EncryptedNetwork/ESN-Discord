@@ -78,8 +78,10 @@ client.on('message', message => {
       if (command.permLevel >= rank.power) {
         if(!command.disabled) {
           command.handler(esndb, params)
+          if(command.cleanCmd) message.delete()
         } else if(command.disabled && rank.power === 1){
           command.handler(esndb, params)
+          if(command.cleanCmd) message.delete()
         } else {
           author.sendEmbed({
             color: config.COLOR_ERROR,
