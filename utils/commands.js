@@ -4,7 +4,7 @@ module.exports = {
     description: `Help command. Type \`\`~help support\`\` for a more detailed explanation.`,
     blockBot: true,
     permLevel: 10,
-    disabled: false,
+    disabled: true,
     cleanCmd: false
   },
   'profile': {
@@ -20,7 +20,7 @@ module.exports = {
     description: 'Flip a coin! True, blissful randomness.',
     blockBot: true,
     permLevel: 20,
-    disabled: false,
+    disabled: true,
     cleanCmd: false
   },
   'version': {
@@ -60,7 +60,7 @@ module.exports = {
     description: 'Luckiness detector. Use at your own risk.',
     blockBot: true,
     permLevel: 20,
-    disabled: false,
+    disabled: true,
     cleanCmd: false
   },
   'purge': {
